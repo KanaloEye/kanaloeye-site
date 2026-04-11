@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KanaloEye — Drone professionnel Guadeloupe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue:    #2854a1;
+      --blue2:   #1d3d7a;
+      --blue3:   #3d6cc7;
+      --blue-bg: #edf1f9;
+      --emerald: #00a878;
+      --em2:     #00c48e;
+      --em-bg:   #e6f7f2;
+      --white:   #ffffff;
+      --bg:      #f4f6fa;
+      --gray:    #5a6a80;
+      --gray2:   #8a9ab5;
+      --border:  rgba(40,84,161,0.10);
+      --shadow:  0 2px 14px rgba(40,84,161,0.08);
+      --shadow2: 0 10px 38px rgba(40,84,161,0.14);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--blue2);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif}
+    img{max-width:100%;display:block}
+    a{text-decoration:none}
+
+    /* ══ NAV ══ */
+    nav{
+      position:sticky;top:0;z-index:1000;
+      background:rgba(255,255,255,0.97);backdrop-filter:blur(18px);
+      border-bottom:1px solid var(--border);
+      padding:0 2rem;
+      display:flex;align-items:center;justify-content:space-between;
+      height:78px;
+    }
+    .logo{display:flex;align-items:center;gap:12px;cursor:pointer;flex-shrink:0}
+    .logo img{height:52px;width:auto;object-fit:contain}
+    .logo-text{font-family:'Outfit',sans-serif;font-weight:700;font-size:19px;color:var(--blue)}
+    .logo-text span{color:var(--emerald)}
+    .nav-links{display:flex;gap:2px;align-items:center}
+    .nav-link{background:none;border:none;padding:9px 14px;border-radius:8px;font-family:'Inter',sans-serif;font-size:14px;font-weight:400;color:var(--gray);cursor:pointer;transition:all .15s;white-space:nowrap}
+    .nav-link:hover{background:var(--blue-bg);color:var(--blue)}
+    .nav-link.active{background:var(--blue);color:#fff;font-weight:500}
+    .nav-cta{background:var(--emerald);color:#fff;border:none;padding:10px 20px;border-radius:9px;font-family:'Outfit',sans-serif;font-weight:600;font-size:14px;cursor:pointer;transition:all .18s;white-space:nowrap;margin-left:8px}
+    .nav-cta:hover{background:var(--em2);box-shadow:0 4px 16px rgba(0,168,120,.3)}
+    .nav-hamburger{display:none;background:none;border:none;cursor:pointer;padding:6px;flex-shrink:0}
+    .nav-hamburger span{display:block;width:22px;height:2px;background:var(--blue);margin:5px 0;border-radius:2px;transition:all .25s}
+    .nav-hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+    .nav-hamburger.open span:nth-child(2){opacity:0}
+    .nav-hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+    /* ══ PAGES ══ */
+    .page{display:none;min-height:calc(100vh - 78px)}
+    .page.active{display:block}
+
+    /* ══ HERO ══ */
+    .hero{position:relative;overflow:hidden;min-height:92vh;display:flex;align-items:center;justify-content:center;background:var(--blue2)}
+    .hero-video-wrap{position:absolute;inset:0;overflow:hidden}
+    .hero-video-wrap video{width:100%;height:100%;object-fit:cover;opacity:.2}
+    .hero-video-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(150deg,rgba(29,61,122,.85) 0%,rgba(40,84,161,.55) 50%,rgba(0,168,120,.18) 100%)}
+    .hero-content{position:relative;z-index:2;text-align:center;padding:4rem 1.5rem;max-width:780px;width:100%}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,168,120,.15);border:1px solid rgba(0,168,120,.4);border-radius:30px;padding:6px 16px;margin-bottom:1.6rem;font-size:11px;color:var(--em2);letter-spacing:.1em;text-transform:uppercase;font-family:'Outfit',sans-serif;font-weight:500}
+    .hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--emerald);animation:pulse 2s infinite;flex-shrink:0}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
+    .hero h1{font-family:'Outfit',sans-serif;font-size:clamp(26px,5vw,58px);font-weight:800;color:#fff;line-height:1.1;margin-bottom:1.2rem;letter-spacing:-.02em}
+    .hero h1 em{font-style:normal;color:var(--em2)}
+    .hero-sub{font-size:clamp(14px,2vw,16px);color:rgba(255,255,255,.68);line-height:1.88;max-width:500px;margin:0 auto 2.5rem;font-weight:300}
+    .hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .btn-primary{background:var(--emerald);color:#fff;border:none;padding:13px 26px;border-radius:9px;font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;cursor:pointer;transition:all .2s;white-space:nowrap}
+    .btn-primary:hover{background:var(--em2);transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,168,120,.4)}
+    .btn-outline{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.3);padding:13px 26px;border-radius:9px;font-family:'Outfit',sans-serif;font-weight:600;font-size:14px;cursor:pointer;transition:all .2s;white-space:nowrap}
+    .btn-outline:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.65)}
+    .hero-stats{display:flex;gap:2rem;justify-content:center;margin-top:3.5rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.1);flex-wrap:wrap;row-gap:1.2rem}
+    .stat-item{text-align:center;min-width:60px}
+    .stat-num{font-family:'Outfit',sans-serif;font-size:clamp(22px,3vw,30px);font-weight:800;color:var(--em2);line-height:1}
+    .stat-label{font-size:9.5px;color:rgba(255,255,255,.42);margin-top:4px;text-transform:uppercase;letter-spacing:.09em}
+
+    /* ══ SECTIONS ══ */
+    .section{padding:4rem 1.5rem;max-width:1100px;margin:0 auto}
+    @media(min-width:640px){.section{padding:5.5rem 2.5rem}}
+    .section-label{font-size:10.5px;font-weight:600;color:var(--emerald);letter-spacing:.2em;text-transform:uppercase;margin-bottom:10px;font-family:'Outfit',sans-serif}
+    .section-title{font-size:clamp(20px,3vw,36px);font-weight:700;color:var(--blue);line-height:1.2;margin-bottom:.9rem}
+    .section-sub{font-size:14.5px;color:var(--gray);line-height:1.88;max-width:510px;margin-bottom:2.5rem;font-weight:300}
+
+    /* ══ SERVICES ══ */
+    .services-grid{display:grid;grid-template-columns:1fr;gap:14px}
+    @media(min-width:560px){.services-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:900px){.services-grid{grid-template-columns:repeat(3,1fr)}}
+    .service-card{border:1px solid var(--border);border-radius:13px;padding:1.5rem;background:#fff;transition:all .22s;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+    .service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--emerald));transform:scaleX(0);transform-origin:left;transition:transform .28s}
+    .service-card:hover{border-color:rgba(0,168,120,.25);transform:translateY(-4px);box-shadow:var(--shadow2)}
+    .service-card:hover::before{transform:scaleX(1)}
+    .service-photo{width:100%;height:145px;border-radius:9px;object-fit:cover;margin-bottom:1rem;background:var(--bg)}
+    .service-icon{width:44px;height:44px;border-radius:11px;margin-bottom:1rem;display:flex;align-items:center;justify-content:center;font-size:20px;background:var(--blue-bg)}
+    .service-card h4{font-family:'Outfit',sans-serif;font-size:15px;font-weight:600;margin-bottom:6px;color:var(--blue)}
+    .service-card p{font-size:13px;color:var(--gray);line-height:1.75}
+
+    /* ══ TARIFICATION ══ */
+    .tarifs-separator{max-width:1100px;margin:0 auto;padding:0 1.5rem 4rem}
+    @media(min-width:640px){.tarifs-separator{padding:0 2.5rem 5.5rem}}
+    .tarifs-divider{border:none;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin-bottom:3rem}
+    .tarifs-intro{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2rem}
+    .tarifs-intro-text h3{font-family:'Outfit',sans-serif;font-size:clamp(18px,2.5vw,24px);font-weight:700;color:var(--blue);margin-bottom:.5rem}
+    .tarifs-intro-text p{font-size:13.5px;color:var(--gray);font-weight:300;line-height:1.7;max-width:460px}
+    .tarifs-note{background:var(--blue-bg);border:1px solid var(--border);border-radius:10px;padding:.75rem 1rem;font-size:12px;color:var(--blue);font-weight:400;line-height:1.55;max-width:100%}
+    .tarifs-note strong{font-weight:600}
+    .tarifs-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:1.8rem}
+    @media(min-width:640px){.tarifs-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:900px){.tarifs-grid{grid-template-columns:repeat(3,1fr)}}
+    .tarif-card{background:#fff;border:1px solid var(--border);border-radius:13px;overflow:hidden;box-shadow:var(--shadow);transition:all .22s}
+    .tarif-card:hover{transform:translateY(-3px);box-shadow:var(--shadow2)}
+    .tarif-card.featured{border-color:rgba(40,84,161,.3);position:relative}
+    .tarif-card.featured::before{content:'Missions techniques';position:absolute;top:0;left:0;right:0;background:linear-gradient(90deg,var(--blue),var(--blue3));color:#fff;font-size:10px;font-weight:600;text-align:center;padding:5px;font-family:'Outfit',sans-serif;letter-spacing:.08em;text-transform:uppercase}
+    .tarif-header{padding:1.3rem 1.3rem .8rem;border-bottom:1px solid var(--border)}
+    .tarif-card.featured .tarif-header{padding-top:2.1rem}
+    .tarif-category{font-size:10px;font-weight:600;color:var(--emerald);letter-spacing:.15em;text-transform:uppercase;font-family:'Outfit',sans-serif;margin-bottom:5px}
+    .tarif-title{font-family:'Outfit',sans-serif;font-size:15.5px;font-weight:700;color:var(--blue);margin-bottom:4px}
+    .tarif-price{font-family:'Outfit',sans-serif;font-size:26px;font-weight:800;color:var(--blue);display:flex;align-items:baseline;gap:4px;margin-top:7px}
+    .tarif-price span{font-size:13px;font-weight:400;color:var(--gray)}
+    .tarif-body{padding:1rem 1.3rem 1.3rem}
+    .tarif-includes{font-size:10.5px;font-weight:600;color:var(--gray2);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.65rem;font-family:'Outfit',sans-serif}
+    .tarif-list{list-style:none;display:flex;flex-direction:column;gap:5px}
+    .tarif-list li{display:flex;align-items:flex-start;gap:7px;font-size:12.5px;color:var(--gray);line-height:1.5}
+    .tarif-list li::before{content:'✓';color:var(--emerald);font-weight:700;font-size:11px;margin-top:1px;flex-shrink:0}
+    .tarif-mention{font-size:11px;color:var(--gray2);font-style:italic;margin-top:.8rem;line-height:1.55;font-weight:300}
+    .tarifs-recap{background:linear-gradient(135deg,var(--blue) 0%,var(--blue3) 60%,var(--emerald) 140%);border-radius:13px;padding:1.4rem 1.6rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;box-shadow:var(--shadow2)}
+    .tarifs-recap-text{color:#fff}
+    .tarifs-recap-text strong{font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;display:block;margin-bottom:3px}
+    .tarifs-recap-text span{font-size:13px;color:rgba(255,255,255,.72);font-weight:300}
+    .tarifs-recap-btn{background:#fff;color:var(--blue);border:none;padding:10px 20px;border-radius:8px;font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;cursor:pointer;transition:all .18s;white-space:nowrap}
+    .tarifs-recap-btn:hover{background:var(--em2);color:#fff}
+
+    /* ══ RÉALISATIONS ══ */
+    .real-grid{display:grid;grid-template-columns:1fr;gap:14px}
+    @media(min-width:600px){.real-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:900px){.real-grid{grid-template-columns:repeat(3,1fr)}}
+    .real-card{border-radius:13px;overflow:hidden;border:1px solid var(--border);background:#fff;transition:all .22s;cursor:pointer;box-shadow:var(--shadow)}
+    .real-card:hover{transform:translateY(-5px);box-shadow:var(--shadow2)}
+    .real-thumb{height:210px;overflow:hidden;position:relative}
+    .real-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .45s ease}
+    .real-card:hover .real-thumb img{transform:scale(1.07)}
+    .real-thumb-placeholder{height:210px;display:flex;align-items:center;justify-content:center;font-size:44px;background:linear-gradient(135deg,var(--blue-bg),var(--blue))}
+    .real-body{padding:1.2rem}
+    .real-body h4{font-family:'Outfit',sans-serif;font-size:14.5px;font-weight:600;margin-bottom:6px;color:var(--blue)}
+    .real-body p{font-size:12.5px;color:var(--gray);line-height:1.72;margin-bottom:10px}
+    .tags{display:flex;flex-wrap:wrap;gap:5px}
+    .tag{background:var(--blue-bg);color:var(--blue);font-size:10.5px;font-weight:500;padding:3px 9px;border-radius:20px;font-family:'Outfit',sans-serif}
+
+    /* ══ MODAL ══ */
+    .modal-overlay{display:none;position:fixed;inset:0;z-index:9000;background:rgba(15,22,40,.88);backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:1rem;overflow-y:auto}
+    .modal-overlay.open{display:flex}
+    .modal-inner{position:relative;max-width:720px;width:100%;background:#fff;border-radius:16px;overflow:hidden;max-height:92vh;overflow-y:auto;box-shadow:0 30px 80px rgba(15,22,40,.5)}
+    .modal-img{width:100%;height:220px;object-fit:cover;display:block}
+    @media(min-width:600px){.modal-img{height:260px}}
+    .modal-img-placeholder{width:100%;height:220px;display:flex;align-items:center;justify-content:center;font-size:56px;background:linear-gradient(135deg,var(--blue),var(--emerald))}
+    .modal-body{padding:1.6rem}
+    .modal-close{position:absolute;top:12px;right:12px;background:rgba(255,255,255,.92);border:none;color:var(--blue2);font-size:16px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;z-index:10;font-weight:700}
+    .modal-close:hover{background:var(--emerald);color:#fff}
+    .modal-label{font-size:10.5px;font-weight:600;color:var(--emerald);letter-spacing:.14em;text-transform:uppercase;margin-bottom:7px;font-family:'Outfit',sans-serif}
+    .modal-title{font-family:'Outfit',sans-serif;font-size:clamp(18px,3vw,21px);font-weight:700;color:var(--blue);margin-bottom:1rem;line-height:1.28}
+    .modal-text{font-size:13.5px;color:var(--gray);line-height:1.9;margin-bottom:.85rem;font-weight:300}
+    .modal-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:1.2rem}
+
+    /* ══ MÉDIAS — CARROUSEL ══ */
+    .media-page-hero{background:var(--blue);padding:3.5rem 1.5rem 2rem;text-align:center}
+    @media(min-width:640px){.media-page-hero{padding:4.5rem 2.5rem 2.5rem}}
+    .media-page-hero h2{font-family:'Outfit',sans-serif;font-size:clamp(22px,4vw,36px);font-weight:700;color:#fff;margin-bottom:.6rem}
+    .media-page-hero p{font-size:14px;color:rgba(255,255,255,.65);font-weight:300}
+
+    .carousel-section{padding:2.5rem 0 3.5rem}
+    .carousel-section .cs-label{font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;color:var(--emerald);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.5rem;padding:0 1.5rem}
+    @media(min-width:640px){.carousel-section .cs-label{padding:0 2.5rem}}
+    .carousel-section .cs-title{font-family:'Outfit',sans-serif;font-size:clamp(16px,2.5vw,22px);font-weight:700;color:var(--blue);margin-bottom:1.4rem;padding:0 1.5rem}
+    @media(min-width:640px){.carousel-section .cs-title{padding:0 2.5rem}}
+
+    /* Piste de défilement */
+    .carousel-track-wrap{position:relative;overflow:hidden}
+    .carousel-track{
+      display:flex;gap:14px;
+      overflow-x:auto;scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+      padding:0 1.5rem 1rem;
+    }
+    @media(min-width:640px){.carousel-track{padding:0 2.5rem 1rem}}
+    .carousel-track::-webkit-scrollbar{display:none}
+
+    .carousel-item{
+      flex:0 0 auto;
+      width:calc(100vw - 3rem);
+      max-width:380px;
+      scroll-snap-align:start;
+      border-radius:13px;overflow:hidden;cursor:pointer;
+      position:relative;background:var(--blue2);
+      box-shadow:var(--shadow);transition:transform .2s
+    }
+    @media(min-width:600px){.carousel-item{width:340px}}
+    @media(min-width:900px){.carousel-item{width:380px}}
+    .carousel-item:hover{transform:translateY(-3px)}
+    .carousel-item img{width:100%;height:240px;object-fit:cover;display:block;transition:transform .4s}
+    @media(min-width:640px){.carousel-item img{height:280px}}
+    .carousel-item:hover img{transform:scale(1.04)}
+    .carousel-item.video-item img{filter:brightness(.88)}
+
+    /* Overlay au survol */
+    .ci-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(29,61,122,.45);opacity:0;transition:opacity .25s}
+    .carousel-item:hover .ci-overlay{opacity:1}
+    .ci-play{width:52px;height:52px;border-radius:50%;background:rgba(0,168,120,.9);display:flex;align-items:center;justify-content:center;margin-bottom:8px}
+    .ci-play svg{width:20px;height:20px;fill:#fff;margin-left:3px}
+    .ci-overlay span{color:#fff;font-size:13px;font-weight:500;font-family:'Outfit',sans-serif}
+
+    /* Badge type (Photo / Vidéo) */
+    .ci-badge{position:absolute;top:10px;left:10px;background:rgba(29,61,122,.78);backdrop-filter:blur(5px);color:#fff;font-size:9.5px;font-weight:600;padding:3px 8px;border-radius:20px;text-transform:uppercase;letter-spacing:.06em;font-family:'Outfit',sans-serif}
+
+    /* Légende sous l'image */
+    .ci-caption{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(29,61,122,.75));padding:.8rem 1rem .7rem;color:#fff;font-size:12.5px;font-weight:500;font-family:'Outfit',sans-serif}
+
+    /* Points de navigation */
+    .carousel-dots{display:flex;justify-content:center;gap:8px;padding:1.2rem 0 0}
+    .dot{width:10px;height:10px;border-radius:50%;background:var(--gray2);border:none;cursor:pointer;padding:0;transition:all .25s;flex-shrink:0;opacity:.5}
+    .dot:hover{opacity:.8;background:var(--blue)}
+    .dot.active{background:var(--blue);width:28px;border-radius:5px;opacity:1}
+
+    /* ══ LIGHTBOX ══ */
+    .lightbox-overlay{display:none;position:fixed;inset:0;z-index:9000;background:rgba(15,22,40,.92);backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:1rem}
+    .lightbox-overlay.open{display:flex}
+    .lightbox-inner{position:relative;max-width:900px;width:100%}
+    .lightbox-inner img{width:100%;border-radius:12px;max-height:85vh;object-fit:contain}
+    .lightbox-inner video{width:100%;border-radius:12px;max-height:85vh;outline:none}
+    .lightbox-close{position:absolute;top:-40px;right:0;background:rgba(255,255,255,.14);border:none;color:#fff;font-size:18px;width:34px;height:34px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
+    .lightbox-close:hover{background:var(--emerald)}
+    .lightbox-caption{margin-top:12px;text-align:center;font-size:12px;color:rgba(255,255,255,.5);font-weight:300}
+
+    /* ══ ATOUTS ══ */
+    .atouts-hero{background:var(--blue);color:#fff;padding:4rem 1.5rem;text-align:center;position:relative;overflow:hidden}
+    @media(min-width:640px){.atouts-hero{padding:5rem 2.5rem}}
+    .atouts-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--blue2) 0%,var(--blue) 55%,var(--blue3) 100%)}
+    .atouts-hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(0,168,120,.2),transparent 60%)}
+    .atouts-hero-content{position:relative;z-index:2;max-width:620px;margin:0 auto}
+    .atouts-hero h2{font-family:'Outfit',sans-serif;font-size:clamp(24px,4vw,44px);font-weight:800;margin-bottom:1rem}
+    .atouts-hero p{font-size:15px;color:rgba(255,255,255,.68);line-height:1.88;font-weight:300}
+    .atouts-body{padding:3.5rem 1.5rem;max-width:1100px;margin:0 auto}
+    @media(min-width:640px){.atouts-body{padding:4.5rem 2.5rem}}
+    .about-section{margin-bottom:3.5rem}
+    .about-grid{display:grid;grid-template-columns:1fr;gap:2.5rem;align-items:start}
+    @media(min-width:900px){.about-grid{grid-template-columns:1fr 1fr;gap:3rem}}
+    .about-text-col h3{font-family:'Outfit',sans-serif;font-size:clamp(18px,2.5vw,22px);font-weight:700;color:var(--blue);margin-bottom:1rem;line-height:1.3}
+    .about-text-col p{font-size:13.5px;color:var(--gray);line-height:1.9;margin-bottom:.85rem;font-weight:300}
+    .about-text-col p strong{color:var(--blue);font-weight:600}
+    .profile-col{display:flex;flex-direction:column;gap:13px}
+    .profile-card-new{background:var(--blue);color:#fff;border-radius:14px;padding:1.6rem;box-shadow:var(--shadow2)}
+    .profile-card-top{display:flex;align-items:center;gap:13px;margin-bottom:1.2rem}
+    .avatar{width:52px;height:52px;border-radius:50%;flex-shrink:0;background:rgba(0,168,120,.25);border:2px solid rgba(0,196,142,.5);display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-size:17px;font-weight:700;color:var(--em2)}
+    .profile-name-block strong{font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;display:block;margin-bottom:2px}
+    .profile-name-block span{font-size:12px;color:rgba(255,255,255,.58);line-height:1.5;display:block}
+    .profile-contacts-new{display:flex;flex-direction:column;gap:8px}
+    .pc-item{display:flex;align-items:center;gap:9px;font-size:12.5px;color:rgba(255,255,255,.75)}
+    .pc-icon{width:26px;height:26px;background:rgba(255,255,255,.1);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px}
+    .skills-card{background:#fff;border:1px solid var(--border);border-radius:13px;padding:1.4rem;box-shadow:var(--shadow)}
+    .skills-card-title{font-family:'Outfit',sans-serif;font-size:10.5px;font-weight:600;color:var(--emerald);letter-spacing:.14em;text-transform:uppercase;margin-bottom:.9rem;padding-bottom:7px;border-bottom:1px solid var(--border)}
+    .skill-cloud{display:flex;flex-wrap:wrap;gap:6px}
+    .skill-tag{background:var(--blue-bg);border:1px solid rgba(40,84,161,.12);color:var(--blue);font-size:11px;padding:4px 10px;border-radius:20px}
+    .interets-title{font-family:'Outfit',sans-serif;font-size:clamp(20px,3vw,26px);font-weight:700;color:var(--blue);margin-bottom:.6rem}
+    .interets-sub{font-size:14px;color:var(--gray);margin-bottom:2rem;font-weight:300;line-height:1.7}
+    .interets-grid{display:grid;grid-template-columns:1fr;gap:12px}
+    @media(min-width:560px){.interets-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:900px){.interets-grid{grid-template-columns:repeat(3,1fr)}}
+    .interet-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.3rem;display:flex;gap:.9rem;align-items:flex-start;transition:all .2s;box-shadow:var(--shadow)}
+    .interet-card:hover{border-color:rgba(0,168,120,.3);transform:translateY(-2px);box-shadow:var(--shadow2)}
+    .interet-icon-wrap{width:44px;height:44px;border-radius:10px;flex-shrink:0;background:var(--em-bg);display:flex;align-items:center;justify-content:center;font-size:20px}
+    .interet-body h5{font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;color:var(--blue);margin-bottom:4px}
+    .interet-body p{font-size:12.5px;color:var(--gray);line-height:1.7}
+
+    /* ══ CONTACT ══ */
+    .contact-layout{display:grid;grid-template-columns:1fr;gap:2rem;align-items:start}
+    @media(min-width:768px){.contact-layout{grid-template-columns:1fr 1.7fr;gap:3rem}}
+    .contact-info h3{font-family:'Outfit',sans-serif;font-size:20px;font-weight:700;color:var(--blue);margin-bottom:.9rem}
+    .contact-info p{font-size:13.5px;color:var(--gray);line-height:1.88;margin-bottom:1.3rem}
+    .contact-items{display:flex;flex-direction:column;gap:9px}
+    .c-item{display:flex;align-items:center;gap:11px;padding:10px 13px;background:#fff;border:1px solid var(--border);border-radius:11px;transition:border-color .15s;box-shadow:var(--shadow)}
+    .c-item:hover{border-color:rgba(0,168,120,.4)}
+    .c-icon{width:34px;height:34px;background:var(--em-bg);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px}
+    .c-label{font-size:10px;color:var(--gray2);text-transform:uppercase;letter-spacing:.07em}
+    .c-val{font-size:13px;font-weight:500;color:var(--blue)}
+    .contact-form{background:#fff;border:1px solid var(--border);border-radius:14px;padding:1.8rem;box-shadow:var(--shadow)}
+    .form-title{font-family:'Outfit',sans-serif;font-size:16px;font-weight:600;color:var(--blue);margin-bottom:1.3rem}
+    .form-row{display:grid;grid-template-columns:1fr;gap:10px}
+    @media(min-width:480px){.form-row{grid-template-columns:1fr 1fr}}
+    .form-group{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
+    .form-group label{font-size:10px;font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.07em;font-family:'Outfit',sans-serif}
+    .form-group input,.form-group select,.form-group textarea{border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-family:'Inter',sans-serif;font-size:14px;color:var(--blue2);background:var(--bg);outline:none;transition:all .15s;-webkit-appearance:none;appearance:none}
+    .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--emerald);background:#fff;box-shadow:0 0 0 3px rgba(0,168,120,.08)}
+    .form-group textarea{resize:vertical;min-height:100px}
+    .form-submit{width:100%;background:var(--blue);color:#fff;border:none;padding:13px;border-radius:9px;font-family:'Outfit',sans-serif;font-weight:600;font-size:14px;cursor:pointer;transition:all .18s;margin-top:4px;-webkit-tap-highlight-color:transparent}
+    .form-submit:hover{background:var(--emerald);box-shadow:0 6px 20px rgba(0,168,120,.3)}
+    .form-submit:disabled{opacity:.6;cursor:not-allowed}
+    .form-success{display:none;background:var(--em-bg);border:1px solid rgba(0,168,120,.3);border-radius:10px;padding:1.1rem;text-align:center;margin-top:1rem;font-size:13.5px;color:var(--blue);font-weight:500}
+    .form-success.show{display:block}
+    .form-error{display:none;background:#fff0f0;border:1px solid rgba(200,0,0,.2);border-radius:10px;padding:1.1rem;text-align:center;margin-top:1rem;font-size:13px;color:#c00}
+    .form-error.show{display:block}
+
+    /* ══ FOOTER ══ */
+    footer{background:var(--blue2);color:rgba(255,255,255,.4);text-align:center;padding:1.6rem 1.5rem;font-size:12px;border-top:1px solid rgba(255,255,255,.05)}
+    footer span{color:var(--em2);font-weight:500}
+    .footer-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+    .footer-links{display:flex;gap:1.2rem;flex-wrap:wrap;justify-content:center}
+    .footer-links a{color:rgba(255,255,255,.4);font-size:12px;text-decoration:none;transition:color .15s}
+    .footer-links a:hover{color:var(--em2)}
+    /* ── Responsive mobile ── */
+    @media(max-width:768px){
+      .nav-links{
+        display:none;flex-direction:column;
+        position:absolute;top:78px;left:0;right:0;
+        background:#fff;padding:1rem;
+        border-bottom:1px solid var(--border);
+        z-index:999;box-shadow:0 8px 24px rgba(40,84,161,.08)
+      }
+      .nav-links.open{display:flex}
+      .nav-link{width:100%;text-align:left;padding:10px 14px}
+      .nav-cta{width:100%;margin:6px 0 0;text-align:center;padding:11px}
+      .nav-hamburger{display:flex;flex-direction:column}
+      .contact-layout{grid-template-columns:1fr}
+      .about-grid{grid-template-columns:1fr}
+      .tarifs-intro{flex-direction:column}
+      .footer-links{flex-wrap:wrap;justify-content:center}
+    }
+    @media(max-width:500px){
+      .footer-inner{flex-direction:column;text-align:center}
+      .hero-stats{gap:1.2rem}
+      .stat-num{font-size:22px}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <a class="logo" onclick="showPage('accueil')">
+    <img src="Images_site/logo.png" alt="KanaloEye">
+    <div class="logo-text">Kanalo<span>Eye</span></div>
+  </a>
+  <div class="nav-links" id="nav-links">
+    <button class="nav-link active" onclick="showPage('accueil')">Accueil</button>
+    <button class="nav-link"        onclick="showPage('services')">Services</button>
+    <button class="nav-link"        onclick="showPage('realisations')">Réalisations</button>
+    <button class="nav-link"        onclick="showPage('medias')">Médias</button>
+    <button class="nav-link"        onclick="showPage('atouts')">À propos</button>
+    <button class="nav-cta"         onclick="showPage('contact')">Contact</button>
+  </div>
+  <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ════ ACCUEIL ════ -->
+<div id="accueil" class="page active">
+  <div class="hero">
+    <div class="hero-video-wrap">
+      <video autoplay muted loop playsinline poster="Images_site/IMG_moulin.jpg">
+        <source src="Videos_site/VD_moulin.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="hero-content">
+      <h1>L'œil expert au service<br>de <em>décisions éclairées</em></h1>
+      <p class="hero-sub">
+        Acquisition et traitement de données par drone haute précision pour l'inspection technique,
+        la construction, l'ingénierie, l'agriculture et l'environnement.
+      </p>
+      <p style="font-family:'Outfit',sans-serif;font-size:11.5px;font-weight:500;color:rgba(255,255,255,.45);letter-spacing:.2em;text-transform:uppercase;margin-bottom:1.8rem">Guadeloupe</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="showPage('services')">Découvrir nos services</button>
+        <button class="btn-outline"  onclick="showPage('contact')">Demander un devis</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item"><div class="stat-num">24h</div><div class="stat-label">Délai de réponse</div></div>
+        <div class="stat-item"><div class="stat-num">~1cm</div><div class="stat-label">Précision</div></div>
+        <div class="stat-item"><div class="stat-num">4K</div><div class="stat-label">Qualité vidéo</div></div>
+        <div class="stat-item"><div class="stat-num">CATS</div><div class="stat-label">DGAC certifié</div></div>
+        <div class="stat-item"><div class="stat-num">RTK</div><div class="stat-label">Positionnement</div></div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-inner">
+      <div>© 2026 <span>KanaloEye</span> — Tous droits réservés</div>
+      <div class="footer-links">
+        <a onclick="showPage('contact')">Contact</a>
+        <a href="tel:+590690057897">+590 690 05 78 97</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ════ SERVICES ════ -->
+<div id="services" class="page">
+  <div class="section">
+    <div class="section-label">Prestations</div>
+    <div class="section-title">Nos services drone</div>
+    <p class="section-sub">Acquisition de données et post-traitement sur mesure, avec livraison de livrables exploitables dans vos outils métiers.</p>
+    <div class="services-grid">
+
+      <!-- Agriculture (ex Analyse multispectrale) -->
+      <div class="service-card">
+        <img src="Images_site/IMG_agriculture.JPG" alt="Agriculture" class="service-photo" onerror="this.style.display='none'">
+        <h4>Agriculture de précision</h4>
+        <p>Indices NDVI, NDRE, NDWI pour l'agriculture de précision. Détection du stress hydrique et cartographie de la santé des cultures.</p>
+      </div>
+
+      <!-- Inspection technique -->
+      <div class="service-card">
+        <img src="Images_site/IMG_eolienne.JPG" alt="Inspection technique" class="service-photo" onerror="this.style.display='none'">
+        <h4>Inspection technique</h4>
+        <p>Contrôle non destructif de toitures, façades, pylônes, ponts et infrastructures difficiles d'accès. Rapport photographique géolocalisé.</p>
+      </div>
+
+      <!-- Photogrammétrie & Modélisation 3D -->
+      <div class="service-card">
+        <img src="Images_site/IMG_moulin.jpg" alt="Modélisation 3D" class="service-photo" onerror="this.style.display='none'">
+        <h4>Photogrammétrie & Modélisation 3D</h4>
+        <p>Nuages de points denses, modèles 3D texturés, MNT/MNS. Idéal pour la documentation de bâtiments, ouvrages et sites patrimoniaux.</p>
+      </div>
+
+      <!-- Cartographie & Orthophotos -->
+      <div class="service-card">
+        <img src="Images_site/IMG_ortho photovoltaique PC.png" alt="Cartographie" class="service-photo" onerror="this.style.display='none'">
+        <h4>Cartographie & Orthophotos</h4>
+        <p>Orthomosaïques haute résolution (jusqu'à 2 cm/px), plans de masse et cartes géoréférencées. Livrables GeoTIFF, formats SIG standards.</p>
+      </div>
+
+      <!-- Topographie & Cubatures -->
+      <div class="service-card">
+        <img src="Images_site/IMG_tasdeterre.DNG" alt="Topographie" class="service-photo"
+             onerror="this.src='Images_site/IMG_tasdeterre1.png';this.onerror=function(){this.style.display='none'}">
+        <h4>Topographie & Cubatures</h4>
+        <p>Relevés topographiques de précision centimétrique, calcul de volumes déblais/remblais, plans de masse pour chantiers BTP.</p>
+      </div>
+
+      <!-- Photographie & Vidéo 4K -->
+      <div class="service-card">
+        <img src="Images_site/IMG_Littoral.JPG" alt="Vidéo 4K" class="service-photo" onerror="this.style.display='none'">
+        <h4>Photographie & Vidéo 4K</h4>
+        <p>Prises de vues aériennes professionnelles pour communication, immobilier et tourisme. Fichiers RAW et 4K livrés sur support numérique.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TARIFICATION -->
+  <div class="tarifs-separator">
+    <hr class="tarifs-divider">
+    <div class="tarifs-intro">
+      <div class="tarifs-intro-text">
+        <h3>Tarifs indicatifs</h3>
+        <p>Grille tarifaire de référence. Chaque mission est unique — un devis personnalisé vous sera transmis sous 24h.</p>
+      </div>
+      <div class="tarifs-note">
+        <strong>⚠️ Tarifs indicatifs</strong><br>
+        Ils varient selon la durée, la zone, les conditions de vol et les livrables demandés.
+      </div>
+    </div>
+    <div class="tarifs-grid">
+      <div class="tarif-card">
+        <div class="tarif-header">
+          <div class="tarif-category">Vidéo aérienne</div>
+          <div class="tarif-title">Prises de vues vidéo 4K</div>
+          <div class="tarif-price">250 €<span>à partir de</span></div>
+        </div>
+        <div class="tarif-body">
+          <div class="tarif-includes">Ce que vous recevez</div>
+          <ul class="tarif-list">
+            <li>Captation drone en résolution 4K</li>
+            <li>Fichiers bruts haute qualité</li>
+            <li>Sélection et tri des meilleures prises</li>
+            <li>Livraison sur support numérique</li>
+            <li>Durée et format adaptés à votre usage</li>
+          </ul>
+          <p class="tarif-mention">Immobilier, tourisme, communication, événementiel. Tarif indicatif, varie selon la durée et la zone de vol.</p>
+        </div>
+      </div>
+      <div class="tarif-card">
+        <div class="tarif-header">
+          <div class="tarif-category">Photographie aérienne</div>
+          <div class="tarif-title">Prises de vues photo HD</div>
+          <div class="tarif-price">250 €<span>à partir de</span></div>
+        </div>
+        <div class="tarif-body">
+          <div class="tarif-includes">Ce que vous recevez</div>
+          <ul class="tarif-list">
+            <li>Captation drone haute résolution</li>
+            <li>Fichiers RAW + JPEG livrés</li>
+            <li>Sélection des meilleures prises</li>
+            <li>Livraison sur support numérique</li>
+            <li>Nombre de clichés selon vos besoins</li>
+          </ul>
+          <p class="tarif-mention">Immobilier, patrimoine, événementiel, communication. Tarif indicatif, varie selon la durée et la zone de vol.</p>
+        </div>
+      </div>
+      <div class="tarif-card featured">
+        <div class="tarif-header">
+          <div class="tarif-category">Missions complexes</div>
+          <div class="tarif-title">Photogrammétrie & données métier</div>
+          <div class="tarif-price">500 €<span>à partir de</span></div>
+        </div>
+        <div class="tarif-body">
+          <div class="tarif-includes">Comprend</div>
+          <ul class="tarif-list">
+            <li>Plan de vol & autorisations</li>
+            <li>Acquisition par drone (RTK)</li>
+            <li>Traitement photogrammétrique complet</li>
+            <li>Orthomosaïque, MNT/MNS, nuage de points 3D</li>
+            <li>Analyse multispectrale (NDVI/NDRE/NDWI)</li>
+            <li>Rapport d'inspection géolocalisé</li>
+            <li>Livrables aux formats SIG standards</li>
+          </ul>
+          <p class="tarif-mention">Cartographie, inspection, topographie, cubatures, analyse environnementale.</p>
+        </div>
+      </div>
+    </div>
+    <div class="tarifs-recap">
+      <div class="tarifs-recap-text">
+        <strong>Besoin d'un devis personnalisé ?</strong>
+        <span>Décrivez votre projet — je vous réponds sous 24h avec une estimation précise.</span>
+      </div>
+      <button class="tarifs-recap-btn" onclick="showPage('contact')">Demander un devis →</button>
+    </div>
+  </div>
+  <footer><div class="footer-inner"><div>© 2026 <span>KanaloEye</span> — Tous droits réservés</div></div></footer>
+</div>
+
+<!-- ════ RÉALISATIONS ════ -->
+<div id="realisations" class="page">
+  <div class="section">
+    <div class="section-label">Projets</div>
+    <div class="section-title">Réalisations</div>
+    <p class="section-sub">Missions menées en Guadeloupe.</p>
+    <div class="real-grid">
+      <div class="real-card" onclick="openModal('moulin')">
+        <div class="real-thumb"><img src="Images_site/IMG_moulin.jpg" alt="Moulin" onerror="this.parentElement.innerHTML='<div class=real-thumb-placeholder>🏛️</div>'"></div>
+        <div class="real-body">
+          <h4>Modélisation 3D — Moulin de Petit-Canal</h4>
+          <p>Capture et modélisation d'un moulin à vent historique, témoin du patrimoine sucrier guadeloupéen.</p>
+          <div class="tags"><span class="tag">Modélisation 3D</span><span class="tag">Patrimoine</span><span class="tag">Grande-Terre</span></div>
+        </div>
+      </div>
+      <div class="real-card" onclick="openModal('eolienne')">
+        <div class="real-thumb"><img src="Images_site/IMG_eolienne.JPG" alt="Éolienne" onerror="this.parentElement.innerHTML='<div class=real-thumb-placeholder>💨</div>'"></div>
+        <div class="real-body">
+          <h4>Inspection technique — Éolienne</h4>
+          <p>Contrôle visuel par drone des pales et de la structure, sans intervention humaine en hauteur.</p>
+          <div class="tags"><span class="tag">Inspection</span><span class="tag">Énergie</span><span class="tag">Rapport HD</span></div>
+        </div>
+      </div>
+      <div class="real-card" onclick="openModal('solaire')">
+        <div class="real-thumb"><img src="Images_site/IMG_ortho photovoltaique PC.png" alt="Solaire" onerror="this.parentElement.innerHTML='<div class=real-thumb-placeholder>☀️</div>'"></div>
+        <div class="real-body">
+          <h4>Orthophotographie — Champ solaire</h4>
+          <p>Cartographie haute résolution d'un parc photovoltaïque et détection thermique des panneaux défaillants.</p>
+          <div class="tags"><span class="tag">Orthophotos</span><span class="tag">Solaire</span><span class="tag">Cartographie</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer><div class="footer-inner"><div>© 2026 <span>KanaloEye</span> — Tous droits réservés</div></div></footer>
+</div>
+
+<!-- ════ MÉDIAS — CARROUSELS ════ -->
+<div id="medias" class="page">
+  <div class="media-page-hero">
+    <div class="section-label" style="color:var(--em2);justify-content:center;display:flex">Galerie</div>
+    <h2>Photos & Vidéos</h2>
+    <p>Images et vidéos captées lors de missions en Guadeloupe.</p>
+  </div>
+
+  <!-- Carrousel 1 : Vidéos -->
+  <div class="carousel-section">
+    <div class="cs-label">Vidéos</div>
+    <div class="cs-title">Missions filmées</div>
+    <div class="carousel-track-wrap">
+      <div class="carousel-track" id="track-videos">
+        <div class="carousel-item video-item" onclick="openLightbox('Videos_site/VD_moulin.mp4','Survol du Moulin — Petit-Canal','video')">
+          <img src="Images_site/IMG_moulin.jpg" alt="Moulin">
+          <div class="ci-badge">▶ Vidéo</div>
+          <div class="ci-overlay"><div class="ci-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><span>Lire</span></div>
+          <div class="ci-caption">Survol du Moulin — Petit-Canal</div>
+        </div>
+        <div class="carousel-item video-item" onclick="openLightbox('Videos_site/VD_enaction.mp4','Drone en action','video')">
+          <img src="Images_site/IMG_M3M2.jpg" alt="Drone">
+          <div class="ci-badge">▶ Vidéo</div>
+          <div class="ci-overlay"><div class="ci-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><span>Lire</span></div>
+          <div class="ci-caption">Drone en action — DJI M3M</div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-dots" id="dots-videos"></div>
+  </div>
+
+  <!-- Carrousel 2 : Terrain & nature -->
+  <div class="carousel-section" style="background:var(--bg)">
+    <div class="cs-label">Terrain & Environnement</div>
+    <div class="cs-title">Nature et paysages</div>
+    <div class="carousel-track-wrap">
+      <div class="carousel-track" id="track-nature">
+        <div class="carousel-item" onclick="openLightbox('Images_site/IMG_Littoral.JPG','Littoral — Guadeloupe')">
+          <img src="Images_site/IMG_Littoral.JPG" alt="Littoral">
+          <div class="ci-badge">Photo</div>
+          <div class="ci-overlay"><span>Agrandir</span></div>
+          <div class="ci-caption">Littoral — Guadeloupe</div>
+        </div>
+        <div class="carousel-item" onclick="openLightbox('Images_site/IMG_zone_humide.JPG','Zone humide')">
+          <img src="Images_site/IMG_zone_humide.JPG" alt="Zone humide">
+          <div class="ci-badge">Photo</div>
+          <div class="ci-overlay"><span>Agrandir</span></div>
+          <div class="ci-caption">Zone humide</div>
+        </div>
+        <div class="carousel-item" onclick="openLightbox('Images_site/IMG_bananerais.JPG','Bananerais')">
+          <img src="Images_site/IMG_bananerais.JPG" alt="Bananerais">
+          <div class="ci-badge">Photo</div>
+          <div class="ci-overlay"><span>Agrandir</span></div>
+          <div class="ci-caption">Bananerais — survol</div>
+        </div>
+        <div class="carousel-item" onclick="openLightbox('Images_site/IMG_agriculture.JPG','Agriculture')">
+          <img src="Images_site/IMG_agriculture.JPG" alt="Agriculture">
+          <div class="ci-badge">Photo</div>
+          <div class="ci-overlay"><span>Agrandir</span></div>
+          <div class="ci-caption">Agriculture de précision</div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-dots" id="dots-nature"></div>
+  </div>
+
+  <!-- Carrousel 3 : Technique & Chantiers -->
+  <div class="carousel-section">
+    <div class="cs-label">Technique & BTP</div>
+    <div class="cs-title">Inspection et chantiers</div>
+    <div class="carousel-track-wrap">
+      <div class="carousel-track" id="track-tech">
+        <div class="carousel-item" onclick="openLightbox('Images_site/IMG_construction.JPG','Inspection)">
+          <img src="Images_site/IMG_construction.JPG" alt="Chantier">
+          <div class="ci-badge">Photo</div>
+          <div class="ci-overlay"><span>Agrandir</span></div>
+          <div class="ci-caption">Suivi de chantier</div>
+        </div>
+        <div class="carousel-item" onclick="openLightbox('Images_site/IMG_M3M1.jpg','Drone M3M — capteur multispectral')">
+          <img src="Images_site/IMG_M3M1.jpg" alt="Drone M3M">
+          <div class="ci-badge">Photo</div>
+          <div class="ci-overlay"><span>Agrandir</span></div>
+          <div class="ci-caption">Drone DJI M3M — multispectral</div>
+        </div>
+        <div class="carousel-item" onclick="openLightbox('Images_site/IMG_moulin.jpg','Moulin — Petit-Canal')">
+          <img src="Images_site/IMG_moulin.jpg" alt="Moulin">
+          <div class="ci-badge">Photo</div>
+          <div class="ci-overlay"><span>Agrandir</span></div>
+          <div class="ci-caption">Moulin — Petit-Canal</div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-dots" id="dots-tech"></div>
+  </div>
+
+  <footer style="margin-top:2rem"><div class="footer-inner"><div>© 2026 <span>KanaloEye</span> — Tous droits réservés</div></div></footer>
+</div>
+
+<!-- ════ À PROPOS ════ -->
+<div id="atouts" class="page">
+  <div class="atouts-hero">
+    <div class="atouts-hero-content">
+      <div class="section-label" style="color:var(--em2);display:flex;justify-content:center;margin-bottom:12px">À propos</div>
+      <h2>KanaloEye & Sébastien Cnudde</h2>
+      <p>Une structure locale, un professionnel certifié, un équipement de pointe au service de vos projets dans l'archipel de Guadeloupe.</p>
+    </div>
+  </div>
+  <div class="atouts-body">
+    <div class="about-section">
+      <div class="about-grid">
+        <div class="about-text-col">
+          <div class="section-label">L'entreprise</div>
+          <h3>KanaloEYE, votre partenaire drone pour des missions précises et sécurisées.</h3>
+          <p>Spécialisés dans les prestations professionnelles par drone au service de <strong>l'inspection technique, de la construction, de l'agriculture et de l'environnement</strong>. Nous permettons la collecte de données fiables pour vous accompagner dans la prise de décision, tout en réduisant les coûts et les risques.</p>
+          <p>Basés en Guadeloupe, nous maîtrisons les spécificités locales : milieux insulaires tropicaux, biodiversité exceptionnelle et risques naturels propres aux Antilles.</p>
+
+          <div class="section-label" style="margin-top:1.8rem">Le télépilote</div>
+          <p><strong>Sébastien Cnudde</strong>, fondateur de KanaloEye, est télépilote professionnel certifié DGAC (CATS). Habitué des processus de demande d'autorisation de vol, il garantit des missions conformes à la réglementation européenne UAS sur l'ensemble de l'archipel.</p>
+          <p>Il maîtrise la chaîne complète : <strong>acquisition par drone, post-traitement photo et vidéo, montage vidéo</strong>, traitement photogrammétrique (Agisoft Metashape), analyse SIG (QGIS, Global Mapper) et livraison de livrables exploitables. Son <strong>ordinateur de traitement haute performance</strong> lui permet de réaliser des modélisations 3D lourdes — nuages de points denses, orthomosaïques grand format — directement depuis la Guadeloupe.</p>
+          <p>La <strong>précision centimétrique</strong> est obtenue grâce au module RTK embarqué. Elle varie selon la hauteur de vol mais atteint environ 1 cm dans des conditions optimales, sans nécessiter de points d'appui au sol (GCP).</p>
+        </div>
+        <div class="profile-col">
+          <div class="profile-card-new">
+            <div class="profile-card-top">
+              <div class="avatar">SC</div>
+              <div class="profile-name-block">
+                <strong>Sébastien Cnudde</strong>
+                <span>Fondateur & Télépilote professionnel<br>KanaloEye — Guadeloupe</span>
+              </div>
+            </div>
+            <div class="profile-contacts-new">
+              <div class="pc-item"><div class="pc-icon">📞</div>+590 690 05 78 97</div>
+              <div class="pc-item"><div class="pc-icon">✉️</div><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="43202c2d372220376d28222d222f2c263a2603242e222a2f6d202c2e">[email&#160;protected]</a></div>
+              <div class="pc-item"><div class="pc-icon">🔗</div><a href="https://www.linkedin.com/company/112090132/admin/dashboard/" target="_blank" style="color:rgba(255,255,255,.75)">LinkedIn — Kanaloeye</a></div>
+              <div class="pc-item"><div class="pc-icon">📍</div>Guadeloupe & Archipel</div>
+            </div>
+          </div>
+          <div class="skills-card">
+            <div class="skills-card-title">Certifications & équipement</div>
+            <div class="skill-cloud">
+              <span class="skill-tag">CATS — DGAC</span>
+              <span class="skill-tag">Autorisations de vol</span>
+              <span class="skill-tag">DJI M3M Multispectral</span>
+              <span class="skill-tag">Module RTK</span>
+              <span class="skill-tag">Workstation 3D</span>
+              <span class="skill-tag">Agisoft Metashape</span>
+              <span class="skill-tag">Global Mapper</span>
+              <span class="skill-tag">QGIS</span>
+              <span class="skill-tag">Montage vidéo</span>
+              <span class="skill-tag">Retouche photo</span>
+              <span class="skill-tag">Photogrammétrie</span>
+              <span class="skill-tag">Modélisation 3D</span>
+              <span class="skill-tag">NDVI / NDRE / NDWI</span>
+              <span class="skill-tag">Inspection technique</span>
+              <span class="skill-tag">Topographie RTK</span>
+              <span class="skill-tag">Cubatures</span>
+              <span class="skill-tag">Vidéo 4K</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="interets-title">Quels intérêts ?</div>
+    <p class="interets-sub">Les avantages concrets de recourir à notre solution drone professionnelle.</p>
+    <div class="interets-grid">
+      <div class="interet-card"><div class="interet-icon-wrap">€</div><div class="interet-body"><h5>Coût réduit</h5><p>Jusqu'à 10 fois moins cher que les avions ou hélicoptères pour des missions similaires.</p></div></div>
+      <div class="interet-card"><div class="interet-icon-wrap">🔧</div><div class="interet-body"><h5>Adaptable</h5><p>Interventions dans les zones difficiles, dangereuses ou accidentées, sans exposer le personnel.</p></div></div>
+      <div class="interet-card"><div class="interet-icon-wrap">⚙️</div><div class="interet-body"><h5>Opérationnel et flexible</h5><p>Déployable rapidement sur tout l'archipel guadeloupéen, y compris les îles et zones isolées.</p></div></div>
+      <div class="interet-card"><div class="interet-icon-wrap">🎯</div><div class="interet-body"><h5>Précision centimétrique</h5><p>Positionnement centimétrique grâce au module RTK embarqué — sans points d'appui au sol.</p></div></div>
+      <div class="interet-card"><div class="interet-icon-wrap">🛡️</div><div class="interet-body"><h5>Sécurité</h5><p>Missions sans exposer le personnel à des risques. Accès aux zones inaccessibles ou dangereuses.</p></div></div>
+      <div class="interet-card"><div class="interet-icon-wrap">📊</div><div class="interet-body"><h5>Données exploitables</h5><p>Livrables aux formats standards, prêts à intégrer dans vos outils SIG et logiciels métiers.</p></div></div>
+    </div>
+  </div>
+  <footer><div class="footer-inner"><div>© 2026 <span>KanaloEye</span> — Tous droits réservés</div></div></footer>
+</div>
+
+<!-- ════ CONTACT ════ -->
+<div id="contact" class="page">
+  <div class="section">
+    <div class="section-label">Contact</div>
+    <div class="section-title">Parlons de votre projet</div>
+    <div class="contact-layout">
+      <div class="contact-info">
+        <h3>Sébastien Cnudde</h3>
+        <p>Vous avez un projet de mission drone en Guadeloupe ? Contactez-moi directement. Réponse garantie sous 24h.</p>
+        <div class="contact-items">
+          <div class="c-item"><div class="c-icon">📞</div><div><div class="c-label">Tél / WhatsApp</div><div class="c-val"><a href="tel:+590690057897" style="color:var(--blue)">+590 690 05 78 97</a></div></div></div>
+          <div class="c-item"><div class="c-icon">✉️</div><div><div class="c-label">Email</div><div class="c-val"><a href="/cdn-cgi/l/email-protection#492a26273d282a3d672228272825262c302c092e24282025672a2624" style="color:var(--blue)"><span class="__cf_email__" data-cfemail="01626e6f756062752f6a606f606d6e64786441666c60686d2f626e6c">[email&#160;protected]</span></a></div></div></div>
+          <div class="c-item"><div class="c-icon">🔗</div><div><div class="c-label">LinkedIn</div><div class="c-val"><a href="https://www.linkedin.com/company/112090132/admin/dashboard/" target="_blank" style="color:var(--blue)">linkedin.com/company/kanaloeye</a></div></div></div>
+          <div class="c-item"><div class="c-icon">📍</div><div><div class="c-label">Zone d'intervention</div><div class="c-val">Guadeloupe & Archipel</div></div></div>
+        </div>
+      </div>
+      <!-- ⚠️ Formspree : remplace VOTRE_ID_FORMSPREE
+           1. formspree.io → compte gratuit
+           2. Crée un formulaire → copie l'ID (ex: xpwzrjkn)
+           3. Colle-le dans action="https://formspree.io/f/TON_ID" -->
+      <div class="contact-form">
+        <div class="form-title">Demande de devis</div>
+        <form id="contact-form" action="https://formspree.io/f/VOTRE_ID_FORMSPREE" method="POST">
+          <div class="form-row">
+            <div class="form-group"><label>Nom</label><input type="text" name="nom" placeholder="Votre nom" required></div>
+            <div class="form-group"><label>Prénom</label><input type="text" name="prenom" placeholder="Votre prénom"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Email</label><input type="email" name="email" placeholder="votre@email.com" required></div>
+            <div class="form-group"><label>Téléphone</label><input type="tel" name="telephone" placeholder="+590 ..."></div>
+          </div>
+          <div class="form-group">
+            <label>Type de mission</label>
+            <select name="mission">
+              <option value="">Sélectionner...</option>
+              <option>Cartographie & Modélisation 3D</option>
+              <option>Suivi environnemental</option>
+              <option>Analyse multispectrale</option>
+              <option>Inspection technique</option>
+              <option>Construction & BTP</option>
+              <option>Gestion des risques</option>
+              <option>Photographie & Vidéo 4K</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Description du projet</label>
+            <textarea name="message" placeholder="Décrivez votre projet, la zone géographique, vos besoins spécifiques..." required></textarea>
+          </div>
+          <button type="submit" class="form-submit" id="submit-btn">Envoyer ma demande →</button>
+        </form>
+        <div class="form-success" id="form-success">
+          ✅ Message envoyé ! Je vous répondrai sous 24h.<br>
+          <small style="color:var(--gray);font-weight:300">Ou appelez-moi au +590 690 05 78 97</small>
+        </div>
+        <div class="form-error" id="form-error">
+          ❌ Erreur d'envoi. Écrivez-moi directement à <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="91f2feffe5f0f2e5bffaf0fff0fdfef4e8f4d1f6fcf0f8fdbff2fefc">[email&#160;protected]</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer><div class="footer-inner"><div>© 2026 <span>KanaloEye</span> — Tous droits réservés</div></div></footer>
+</div>
+
+<!-- ════ MODAL ════ -->
+<div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
+  <div class="modal-inner"><button class="modal-close" onclick="closeModal()">✕</button><div id="modal-content"></div></div>
+</div>
+
+<!-- ════ LIGHTBOX ════ -->
+<div class="lightbox-overlay" id="lightbox" onclick="closeLightboxOutside(event)">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <div id="lightbox-content"></div>
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+</div>
+
+<script>
+/* ════ DONNÉES PROJETS ════ */
+const PROJETS = {
+  moulin:{label:'Modélisation 3D — Patrimoine',title:'Modélisation 3D du moulin à vent de Petit-Canal',img:'Images_site/IMG_moulin.jpg',emoji:'🏛️',texts:["Nous avons réalisé une capture dans le temps d'un moulin à vent de Petit-Canal grâce à notre drone.","Les moulins à vent ont été utilisés en Guadeloupe dès le XVIIe siècle pour broyer les cannes à sucre. Construits en pierre, ils exploitaient la force du vent pour actionner un pressoir et transformer la canne en jus, étape indispensable à la production de sucre.","Avant l'arrivée des machines à vapeur, ces moulins étaient essentiels pour le travail agricole et structuraient le paysage local. Aujourd'hui, ils restent des témoins importants du patrimoine guadeloupéen de la Grande-Terre et de Marie-Galante."],tags:['Modélisation 3D','Patrimoine','Grande-Terre','Photogrammétrie']},
+  eolienne:{label:'Inspection technique — Énergie',title:"Inspection par drone d'une éolienne",img:'Images_site/IMG_M3M2.jpg',emoji:'💨',texts:["Nous avons réalisé l'inspection complète d'une éolienne par drone, permettant un contrôle visuel haute définition des pales, du moyeu et de la nacelle sans immobilisation prolongée ni intervention humaine en hauteur.","Cette approche réduit considérablement les risques liés aux travaux en hauteur et divise par trois le temps d'inspection par rapport aux méthodes traditionnelles.","Livrable : rapport photographique géolocalisé avec identification des anomalies (fissures, érosion, délaminage) et recommandations de maintenance. Délai de livraison : 48h après la mission."],tags:['Inspection','Éolienne','Énergie','Rapport HD','Sécurité']},
+  solaire:{label:'Cartographie — Énergie solaire',title:"Orthophotographie d'un champ de panneaux solaires",img:'Images_site/IMG_champcanne.JPG',emoji:'☀️',texts:["Mission de cartographie aérienne haute résolution d'un parc photovoltaïque. L'orthomosaïque produite permet une vue d'ensemble précise et facilite la gestion de maintenance.","Grâce à l'imagerie thermique couplée à l'orthophoto, nous avons pu identifier les panneaux présentant des anomalies de température sans démontage, réduisant le temps de diagnostic.","Livrable : orthomosaïque géoréférencée, cartographie thermique superposée, rapport des panneaux à inspecter en priorité."],tags:['Orthophotos','Solaire','Thermique','Cartographie','Maintenance']}
+};
+
+/* ════ MODAL ════ */
+function openModal(id){const p=PROJETS[id];if(!p)return;document.getElementById('modal-content').innerHTML=`<img class="modal-img" src="${p.img}" alt="${p.title}" onerror="this.outerHTML='<div class=modal-img-placeholder>${p.emoji}</div>'"><div class="modal-body"><div class="modal-label">${p.label}</div><div class="modal-title">${p.title}</div>${p.texts.map(t=>`<p class="modal-text">${t}</p>`).join('')}<div class="modal-tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></div>`;document.getElementById('modal').classList.add('open');document.body.style.overflow='hidden';}
+function closeModal(){document.getElementById('modal').classList.remove('open');document.body.style.overflow='';document.getElementById('modal-content').innerHTML='';}
+function closeModalOutside(e){if(e.target===document.getElementById('modal'))closeModal();}
+
+/* ════ NAVIGATION ════ */
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(b=>b.classList.remove('active'));
+  const page=document.getElementById(id);
+  if(page)page.classList.add('active');
+  const btn=document.querySelector(`.nav-link[onclick="showPage('${id}')"]`);
+  if(btn)btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  document.getElementById('nav-links').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+}
+function toggleMenu(){
+  document.getElementById('nav-links').classList.toggle('open');
+  document.getElementById('hamburger').classList.toggle('open');
+}
+
+/* ════ CARROUSELS ════
+   Pour chaque piste :
+   1. On compte combien d'éléments sont visibles à la fois
+   2. On crée autant de points qu'il y a de "positions" de scroll
+   3. Le scroll met à jour le point actif
+*/
+function initCarousel(trackId, dotsId) {
+  const track = document.getElementById(trackId);
+  if (!track) return;
+
+  // Cache les dots — on n'en a plus besoin
+  const dotsContainer = document.getElementById(dotsId);
+  if (dotsContainer) dotsContainer.style.display = 'none';
+
+  // ── Drag to scroll (souris) ──
+  let isDragging = false;
+  let startX = 0;
+  let scrollStart = 0;
+
+  track.addEventListener('mousedown', e => {
+    isDragging = true;
+    startX = e.pageX - track.offsetLeft;
+    scrollStart = track.scrollLeft;
+    track.style.cursor = 'grabbing';
+    track.style.userSelect = 'none';
+  });
+
+  window.addEventListener('mousemove', e => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX - track.offsetLeft;
+    track.scrollLeft = scrollStart - (x - startX);
+  });
+
+  window.addEventListener('mouseup', () => {
+    isDragging = false;
+    track.style.cursor = 'grab';
+    track.style.userSelect = '';
+  });
+
+  // Curseur grab au survol
+  track.style.cursor = 'grab';
+
+  // Empêche le clic de se déclencher après un drag
+  track.addEventListener('click', e => {
+    if (Math.abs(track.scrollLeft - scrollStart) > 5) e.stopPropagation();
+  }, true);
+}
+
+// Init tous les carrousels au chargement
+document.addEventListener('DOMContentLoaded', () => {
+  initCarousel('track-videos','dots-videos');
+  initCarousel('track-nature','dots-nature');
+  initCarousel('track-tech','dots-tech');
+});
+
+/* ════ LIGHTBOX ════ */
+function openLightbox(src,caption,type='image'){const c=document.getElementById('lightbox-content');c.innerHTML=type==='video'?`<video src="${src}" controls autoplay style="width:100%;border-radius:12px;max-height:85vh;outline:none"></video>`:`<img src="${src}" alt="${caption}" style="width:100%;border-radius:12px;max-height:85vh;object-fit:contain">`;document.getElementById('lightbox-caption').textContent=caption;document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';}
+function closeLightbox(){const lb=document.getElementById('lightbox');lb.classList.remove('open');document.body.style.overflow='';const v=lb.querySelector('video');if(v)v.pause();document.getElementById('lightbox-content').innerHTML='';}
+function closeLightboxOutside(e){if(e.target===document.getElementById('lightbox'))closeLightbox();}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeLightbox();}});
+
+/* ════ FORMULAIRE FORMSPREE ════ */
+const form=document.getElementById('contact-form');
+if(form){form.addEventListener('submit',async function(e){e.preventDefault();const btn=document.getElementById('submit-btn');btn.disabled=true;btn.textContent='Envoi en cours...';try{const r=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});if(r.ok){form.style.display='none';document.getElementById('form-success').classList.add('show');}else throw new Error();}catch{btn.disabled=false;btn.textContent='Envoyer ma demande →';document.getElementById('form-error').classList.add('show');}});}
+</script>
+</body>
+</html>
