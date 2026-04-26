@@ -2,49 +2,49 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://www.kanaloeye.com/</loc>
+    <loc>https://kanaloeye.github.io/kanaloeye-site/</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://www.kanaloeye.com/services.html</loc>
+    <loc>https://kanaloeye.github.io/kanaloeye-site/services.html</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://www.kanaloeye.com/realisations.html</loc>
+    <loc>https://kanaloeye.github.io/kanaloeye-site/realisations.html</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://www.kanaloeye.com/medias.html</loc>
+    <loc>https://kanaloeye.github.io/kanaloeye-site/medias.html</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://www.kanaloeye.com/carte.html</loc>
+    <loc>https://kanaloeye.github.io/kanaloeye-site/carte.html</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://www.kanaloeye.com/a-propos.html</loc>
+    <loc>https://kanaloeye.github.io/kanaloeye-site/a-propos.html</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://www.kanaloeye.com/contact.html</loc>
+    <loc>https://kanaloeye.github.io/kanaloeye-site/contact.html</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.8</priority>
