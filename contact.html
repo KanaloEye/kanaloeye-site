@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Devis drone professionnel en Guadeloupe | KanaloEye</title>
+  <meta name="description" content="Contactez KanaloEye pour un devis de mission drone en Guadeloupe et Antilles françaises. Réponse sous 24h. Tél : +590 690 05 78 97. Télépilote certifié DGAC.">
+  <link rel="canonical" href="https://www.kanaloeye.com/contact.html">
+  <meta property="og:title" content="Contactez KanaloEye — Devis drone en Guadeloupe">
+  <meta property="og:description" content="Demandez un devis pour votre mission drone en Guadeloupe. Réponse garantie sous 24h.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.kanaloeye.com/contact.html">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:image" content="https://www.kanaloeye.com/Images_site/IMG_moulin.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html">
+    <img src="Images_site/logo.png" alt="KanaloEye — Drone professionnel Guadeloupe">
+    <div class="logo-text">Kanalo<span>Eye</span></div>
+  </a>
+  <div class="nav-links" id="nav-links">
+    <a class="nav-link" href="index.html">Accueil</a>
+    <a class="nav-link" href="services.html">Services</a>
+    <a class="nav-link" href="realisations.html">Réalisations</a>
+    <a class="nav-link" href="medias.html">Médias</a>
+    <a class="nav-link" href="carte.html">Carte</a>
+    <a class="nav-link" href="a-propos.html">À propos</a>
+    <a class="nav-cta active" aria-current="page" href="contact.html">Contact</a>
+  </div>
+  <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<main class="page-content">
+  <div class="section">
+    <div class="section-label">Contact</div>
+    <h1 class="section-title">Parlons de votre projet drone en Guadeloupe</h1>
+    <div class="contact-layout">
+      <div class="contact-info">
+        <h2>Sébastien Cnudde</h2>
+        <p>Vous avez un projet de mission drone en Guadeloupe ou dans les Antilles françaises ? Contactez-moi directement. Réponse garantie sous 24h.</p>
+        <div class="contact-items">
+          <div class="c-item"><div class="c-icon">📞</div><div><div class="c-label">Tél / WhatsApp</div><div class="c-val"><a href="tel:+590690057897" style="color:var(--blue)">+590 690 05 78 97</a></div></div></div>
+          <div class="c-item"><div class="c-icon">✉️</div><div><div class="c-label">Email</div><div class="c-val"><a href="mailto:contact.kanaloeye@gmail.com" style="color:var(--blue)">contact.kanaloeye@gmail.com</a></div></div></div>
+          <div class="c-item"><div class="c-icon">🔗</div><div><div class="c-label">LinkedIn</div><div class="c-val"><a href="https://www.linkedin.com/company/112090132/admin/dashboard/" target="_blank" style="color:var(--blue)">linkedin.com/company/kanaloeye</a></div></div></div>
+          <div class="c-item"><div class="c-icon">📍</div><div><div class="c-label">Zone d'intervention</div><div class="c-val">Guadeloupe & Antilles françaises</div></div></div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="form-title">Demande de devis drone</div>
+        <form id="contact-form" action="https://formspree.io/f/mpqkoyle" method="POST">
+          <div class="form-row">
+            <div class="form-group"><label>Nom</label><input type="text" name="nom" placeholder="Votre nom" required></div>
+            <div class="form-group"><label>Prénom</label><input type="text" name="prenom" placeholder="Votre prénom"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Email</label><input type="email" name="email" placeholder="votre@email.com" required></div>
+            <div class="form-group"><label>Téléphone</label><input type="tel" name="telephone" placeholder="+590 ..."></div>
+          </div>
+          <div class="form-group">
+            <label>Type de mission</label>
+            <select name="mission">
+              <option value="">Sélectionner...</option>
+              <option>Cartographie & Modélisation 3D</option>
+              <option>Suivi environnemental</option>
+              <option>Analyse multispectrale</option>
+              <option>Inspection technique</option>
+              <option>Construction & BTP</option>
+              <option>Gestion des risques</option>
+              <option>Photographie & Vidéo 4K</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Description du projet</label>
+            <textarea name="message" placeholder="Décrivez votre projet, la zone géographique, vos besoins spécifiques..." required></textarea>
+          </div>
+          <button type="submit" class="form-submit" id="submit-btn">Envoyer ma demande →</button>
+        </form>
+        <div class="form-success" id="form-success">
+          ✅ Message envoyé ! Je vous répondrai sous 24h.<br>
+          <small style="color:var(--gray);font-weight:300">Ou appelez-moi au +590 690 05 78 97</small>
+        </div>
+        <div class="form-error" id="form-error">
+          ❌ Erreur d'envoi. Écrivez-moi directement à <a href="mailto:contact.kanaloeye@gmail.com" style="color:#c00">contact.kanaloeye@gmail.com</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>© 2026 <span>KanaloEye</span> — Tous droits réservés</div>
+    <div class="footer-links">
+      <a href="contact.html">Contact</a>
+      <a href="tel:+590690057897">+590 690 05 78 97</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){document.getElementById('nav-links').classList.toggle('open');document.getElementById('hamburger').classList.toggle('open');}
+const form=document.getElementById('contact-form');
+if(form){form.addEventListener('submit',async function(e){e.preventDefault();const btn=document.getElementById('submit-btn');btn.disabled=true;btn.textContent='Envoi en cours...';try{const r=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});if(r.ok){form.style.display='none';document.getElementById('form-success').classList.add('show');}else throw new Error();}catch{btn.disabled=false;btn.textContent='Envoyer ma demande →';document.getElementById('form-error').classList.add('show');}});}
+document.addEventListener('DOMContentLoaded', () => {
+  const els = document.querySelectorAll('.c-item');
+  els.forEach(el => { el.classList.add('reveal'); const siblings=el.parentElement?.children; if(siblings){const idx=Array.from(siblings).indexOf(el);if(idx>=0&&idx<6)el.classList.add('reveal-delay-'+(idx+1));} });
+  const io = new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+  els.forEach(el=>io.observe(el));
+});
+</script>
+</body>
+</html>

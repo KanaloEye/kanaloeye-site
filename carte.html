@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carte des interventions drone en Guadeloupe — Zones de vol | KanaloEye</title>
+  <meta name="description" content="Carte interactive des missions drone KanaloEye en Guadeloupe avec les restrictions de vol DGAC. Visualisez nos interventions et vérifiez les zones autorisées pour le drone.">
+  <link rel="canonical" href="https://www.kanaloeye.com/carte.html">
+  <meta property="og:title" content="Carte des interventions drone en Guadeloupe — KanaloEye">
+  <meta property="og:description" content="Carte interactive des missions drone et restrictions de vol DGAC en Guadeloupe et Antilles françaises.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.kanaloeye.com/carte.html">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:image" content="https://www.kanaloeye.com/Images_site/IMG_moulin.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html">
+    <img src="Images_site/logo.png" alt="KanaloEye — Drone professionnel Guadeloupe">
+    <div class="logo-text">Kanalo<span>Eye</span></div>
+  </a>
+  <div class="nav-links" id="nav-links">
+    <a class="nav-link" href="index.html">Accueil</a>
+    <a class="nav-link" href="services.html">Services</a>
+    <a class="nav-link" href="realisations.html">Réalisations</a>
+    <a class="nav-link" href="medias.html">Médias</a>
+    <a class="nav-link active" aria-current="page" href="carte.html">Carte</a>
+    <a class="nav-link" href="a-propos.html">À propos</a>
+    <a class="nav-cta" href="contact.html">Contact</a>
+  </div>
+  <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<main class="page-content">
+  <div class="carte-section">
+    <div class="section-label">Localisation</div>
+    <h1 class="section-title">Carte des interventions drone en Guadeloupe</h1>
+    <p class="section-sub">Missions KanaloEye en Guadeloupe et dans les Antilles françaises, avec les restrictions de vol UAS officielles DGAC. Cliquez sur un marqueur pour voir la fiche mission, ou sur la carte pour vérifier les restrictions de vol.</p>
+
+    <div class="map-container">
+      <div id="map"></div>
+
+      <div class="map-top-controls">
+        <div class="basemap-switcher">
+          <button class="basemap-btn active" id="bm-carto" onclick="switchBasemap('carto')">
+            <div class="bm-icon" style="background:linear-gradient(135deg,#e8e0d4,#c8d8b4)"></div>Routière
+          </button>
+          <button class="basemap-btn" id="bm-satellite" onclick="switchBasemap('satellite')">
+            <div class="bm-icon" style="background:linear-gradient(135deg,#1a3a1a,#2d5a2d,#4a7a3a)"></div>Satellite
+          </button>
+        </div>
+      </div>
+
+      <button class="geolocate-btn" id="geolocate-btn" onclick="geolocateUser()">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3A8.994 8.994 0 0 0 13 3.06V1h-2v2.06A8.994 8.994 0 0 0 3.06 11H1v2h2.06A8.994 8.994 0 0 0 11 20.94V23h2v-2.06A8.994 8.994 0 0 0 20.94 13H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+        Me localiser
+      </button>
+
+      <div class="map-inset-panel">
+        <div>
+          <div class="mip-label">Couche DGAC</div>
+          <div class="map-uas-toggle">
+            <label class="toggle-switch">
+              <input type="checkbox" id="uas-toggle" checked onchange="toggleUAS(this)">
+              <span class="toggle-slider"></span>
+            </label>
+            <span class="toggle-label">Restrictions <strong>UAS/IGN</strong></span>
+          </div>
+        </div>
+        <div class="mip-divider"></div>
+        <div>
+          <div class="mip-label">Signification des couleurs</div>
+          <div class="ucl-items">
+            <div class="ucl-item"><div class="ucl-dot" style="background:#d62839"><span class="ucl-pulse"></span></div><div><strong>Rouge</strong> — Vol interdit <sup>*</sup></div></div>
+            <div class="ucl-item"><div class="ucl-dot" style="background:#f4a5a8"></div><div><strong>Rouge pastel</strong> — Hauteur max 30 m <sup>*</sup></div></div>
+            <div class="ucl-item"><div class="ucl-dot" style="background:#e8850a"></div><div><strong>Orange</strong> — Hauteur max 50 m <sup>*</sup></div></div>
+            <div class="ucl-item"><div class="ucl-dot" style="background:#f5c400"></div><div><strong>Jaune</strong> — Hauteur max 100 m <sup>*</sup></div></div>
+            <div class="ucl-item"><div class="ucl-dot" style="background:#e0e0e0;border:1px solid #bbb"></div><div><strong>Blanc</strong> — Zone libre</div></div>
+          </div>
+          <div class="ucl-footnote"><sup>*</sup> Règles hors demande d'autorisation particulière</div>
+        </div>
+        <div class="mip-divider"></div>
+        <div>
+          <div class="mip-label">Missions</div>
+          <div class="map-filters">
+            <button class="map-filter-btn active" onclick="filterMap('all',this)">Toutes</button>
+            <button class="map-filter-btn" onclick="filterMap('modelisation',this)">3D</button>
+            <button class="map-filter-btn" onclick="filterMap('inspection',this)">Inspection</button>
+            <button class="map-filter-btn" onclick="filterMap('cartographie',this)">Carto</button>
+          </div>
+          <div class="map-leg-item" style="margin-top:.5rem">
+            <div class="map-dot map-dot-mission"></div>Marqueur mission — cliquer
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="map-actions-bar">
+      <div class="map-action-card map-action-alphatango">
+        <div class="mac-icon">AT</div>
+        <div class="mac-body">
+          <div class="mac-title">Vérifier sur AlphaTango</div>
+          <div class="mac-desc">Zones actives, NOTAMs, autorisations DGAC en temps réel</div>
+        </div>
+        <a class="mac-btn" href="https://alphatango.aviation-civile.gouv.fr" target="_blank" rel="noopener">Ouvrir →</a>
+      </div>
+      <div class="map-action-card map-action-sia">
+        <div class="mac-icon">SIA</div>
+        <div class="mac-body">
+          <div class="mac-title">Carte OACI — SIA</div>
+          <div class="mac-desc">Espaces aériens : CTR, TMA, zones P/R/D — référence légale</div>
+        </div>
+        <a class="mac-btn" href="https://www.sia.aviation-civile.gouv.fr/vaip" target="_blank" rel="noopener">Ouvrir →</a>
+      </div>
+    </div>
+    <p class="map-note">Fond UAS : <a href="https://www.geoportail.gouv.fr/donnees/restrictions-uas-categorie-ouverte-et-aeromodelisme" target="_blank" rel="noopener">Géoportail IGN</a> — données non contractuelles, mises à jour annuellement. Vérifier systématiquement sur <a href="https://alphatango.aviation-civile.gouv.fr" target="_blank">AlphaTango</a> avant chaque mission.</p>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>© 2026 <span>KanaloEye</span> — Tous droits réservés</div>
+    <div class="footer-links">
+      <a href="contact.html">Contact</a>
+      <a href="tel:+590690057897">+590 690 05 78 97</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Modal for map popups -->
+<div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
+  <div class="modal-inner"><button class="modal-close" onclick="closeModal()">✕</button><div id="modal-content"></div></div>
+</div>
+
+<script>
+function toggleMenu(){document.getElementById('nav-links').classList.toggle('open');document.getElementById('hamburger').classList.toggle('open');}
+
+const PROJETS = {
+  moulin:{label:'Modélisation 3D — Patrimoine',title:'Modélisation 3D du moulin à vent de Petit-Canal',img:'Images_site/IMG_moulin.jpg',emoji:'🏛️',texts:["Nous avons réalisé une capture dans le temps d'un moulin à vent de Petit-Canal grâce à notre drone.","Les moulins à vent ont été utilisés en Guadeloupe dès le XVIIe siècle pour broyer les cannes à sucre.","Aujourd'hui, ils restent des témoins importants du patrimoine guadeloupéen."],tags:['Modélisation 3D','Patrimoine','Grande-Terre','Photogrammétrie']},
+  eolienne:{label:'Inspection technique — Énergie',title:"Inspection par drone d'une éolienne",img:'Images_site/IMG_eolienne.jpg',emoji:'💨',texts:["Inspection complète d'une éolienne par drone, contrôle visuel haute définition des pales.","Livrable : rapport photographique géolocalisé."],tags:['Inspection','Éolienne','Énergie','Rapport HD']},
+  solaire:{label:'Cartographie — Énergie solaire',title:"Orthophotographie d'un champ de panneaux solaires",img:'Images_site/IMG_ortho photovoltaique PC.png',emoji:'☀️',texts:["Cartographie aérienne haute résolution d'un parc photovoltaïque.","Livrable : orthomosaïque géoréférencée."],tags:['Orthophotos','Solaire','Cartographie']}
+};
+function openModal(id){const p=PROJETS[id];if(!p)return;document.getElementById('modal-content').innerHTML=`<img class="modal-img" src="${p.img}" alt="${p.title}" onerror="this.outerHTML='<div class=modal-img-placeholder>${p.emoji}</div>'"><div class="modal-body"><div class="modal-label">${p.label}</div><div class="modal-title">${p.title}</div>${p.texts.map(t=>`<p class="modal-text">${t}</p>`).join('')}<div class="modal-tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></div>`;document.getElementById('modal').classList.add('open');document.body.style.overflow='hidden';}
+function closeModal(){document.getElementById('modal').classList.remove('open');document.body.style.overflow='';document.getElementById('modal-content').innerHTML='';}
+function closeModalOutside(e){if(e.target===document.getElementById('modal'))closeModal();}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+let carteMap=null,baseLayers={},currentBase='carto',allMarkers=[],uasWmtsLayer=null,userLocMarker=null;
+const MISSIONS=[
+  {lat:16.3973,lng:-61.4217,titre:'Modélisation 3D — Moulin de Petit-Canal',modalId:'moulin',type:'modelisation',typeLabel:'Modélisation 3D · Patrimoine',date:'2026',tags:['Modélisation 3D','Patrimoine','Grande-Terre']},
+  {lat:16.4296,lng:-61.4014,titre:'Inspection technique — Éolienne',modalId:'eolienne',type:'inspection',typeLabel:'Inspection · Énergie',date:'2026',tags:['Inspection','Éolienne','Énergie']},
+  {lat:16.4257,lng:-61.4042,titre:'Orthophotographie — Champ solaire',modalId:'solaire',type:'cartographie',typeLabel:'Cartographie · Énergie solaire',date:'2026',tags:['Orthophotos','Solaire','Cartographie']}
+];
+function buildIcon(){return L.divIcon({className:'',html:'<div style="width:20px;height:20px;border-radius:50%;background:#e85d04;border:3px solid #fff;box-shadow:0 2px 10px rgba(0,0,0,.4)"></div>',iconSize:[20,20],iconAnchor:[10,10],popupAnchor:[0,-13]});}
+
+function geolocateUser(){
+  const btn=document.getElementById('geolocate-btn');
+  if(!carteMap)return;
+  if(!navigator.geolocation){alert('La géolocalisation n\'est pas disponible.');return;}
+  btn.classList.add('loading');
+  btn.innerHTML='<svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:currentColor;animation:spin 1s linear infinite"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg> Localisation...';
+  navigator.geolocation.getCurrentPosition(
+    function(pos){
+      const lat=pos.coords.latitude,lng=pos.coords.longitude;
+      if(userLocMarker)carteMap.removeLayer(userLocMarker);
+      const icon=L.divIcon({html:'<div style="width:18px;height:18px;border-radius:50%;background:#2854a1;border:3px solid #fff;box-shadow:0 0 0 3px rgba(40,84,161,.4),0 2px 8px rgba(40,84,161,.5)"></div>',className:'',iconSize:[18,18],iconAnchor:[9,9]});
+      userLocMarker=L.marker([lat,lng],{icon,zIndexOffset:2000}).addTo(carteMap).bindPopup('<div style="padding:10px 12px;font-family:Outfit,sans-serif"><div style="font-size:10px;font-weight:600;color:#00a878;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">Ma position</div><div style="font-size:12.5px;color:#1d3d7a;font-weight:600">'+lat.toFixed(5)+'° N, '+Math.abs(lng).toFixed(5)+'° W</div></div>').openPopup();
+      carteMap.setView([lat,lng],13,{animate:true});
+      btn.classList.remove('loading');
+      btn.innerHTML='<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:13px;height:13px;fill:currentColor"><path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3A8.994 8.994 0 0 0 13 3.06V1h-2v2.06A8.994 8.994 0 0 0 3.06 11H1v2h2.06A8.994 8.994 0 0 0 11 20.94V23h2v-2.06A8.994 8.994 0 0 0 20.94 13H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg> Me localiser';
+    },
+    function(){btn.classList.remove('loading');btn.innerHTML='<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:13px;height:13px;fill:currentColor"><path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3A8.994 8.994 0 0 0 13 3.06V1h-2v2.06A8.994 8.994 0 0 0 3.06 11H1v2h2.06A8.994 8.994 0 0 0 11 20.94V23h2v-2.06A8.994 8.994 0 0 0 20.94 13H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg> Me localiser';alert('Impossible de vous localiser.');},
+    {enableHighAccuracy:true,timeout:10000}
+  );
+}
+
+function initCarte(){
+  if(carteMap){setTimeout(()=>carteMap.invalidateSize(),150);return;}
+  carteMap=L.map('map',{zoomControl:false,scrollWheelZoom:false}).setView([16.25,-61.55],10);
+  L.control.zoom({position:'bottomright'}).addTo(carteMap);
+  carteMap.getContainer().addEventListener('mouseenter',()=>carteMap.scrollWheelZoom.enable());
+  carteMap.getContainer().addEventListener('mouseleave',()=>carteMap.scrollWheelZoom.disable());
+  baseLayers.carto=L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',{attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',subdomains:'abcd',maxZoom:20});
+  baseLayers.satellite=L.tileLayer('https://mt{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{attribution:'&copy; Google Satellite',subdomains:'0123',maxZoom:20});
+  baseLayers.carto.addTo(carteMap);
+  uasWmtsLayer=L.tileLayer('https://data.geopf.fr/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=TRANSPORTS.DRONES.RESTRICTIONS&STYLE=normal&TILEMATRIXSET=PM&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&FORMAT=image%2Fpng',{attribution:'&copy; <a href="https://www.geoportail.gouv.fr">IGN/DGAC</a>',opacity:0.85,maxZoom:20,tileSize:256}).addTo(carteMap);
+  carteMap.on('click',function(e){
+    const lat=e.latlng.lat,lng=e.latlng.lng;
+    const atUrl='https://alphatango.aviation-civile.gouv.fr/carte?lat='+lat.toFixed(5)+'&lng='+lng.toFixed(5)+'&zoom=13';
+    L.popup({maxWidth:290}).setLatLng(e.latlng).setContent(
+      '<div style="padding:12px 14px"><div style="font-size:9.5px;font-weight:600;color:#00a878;letter-spacing:.14em;text-transform:uppercase;font-family:Outfit,sans-serif;margin-bottom:5px">Vérification de zone</div><div style="font-family:Outfit,sans-serif;font-size:13px;font-weight:600;color:#1d3d7a;margin-bottom:3px">📍 '+lat.toFixed(4)+'° N, '+Math.abs(lng).toFixed(4)+'° W</div><div style="font-size:11.5px;color:#5a6a80;margin-bottom:10px;line-height:1.5">Les couleurs indiquent les restrictions DGAC officielles.</div><a href="'+atUrl+'" target="_blank" rel="noopener" style="display:block;background:#0057a8;color:#fff;text-decoration:none;padding:8px 12px;border-radius:7px;font-family:Outfit,sans-serif;font-size:12px;font-weight:600;text-align:center">Vérifier sur AlphaTango →</a><a href="https://www.geoportail.gouv.fr/carte?c='+lng.toFixed(5)+','+lat.toFixed(5)+'&z=14&l1=TRANSPORTS.DRONES.RESTRICTIONS::GEOPORTAIL:OGC:WMTS(1)" target="_blank" rel="noopener" style="display:block;margin-top:6px;background:#f4f6fa;color:#2854a1;text-decoration:none;padding:7px 12px;border-radius:7px;font-family:Outfit,sans-serif;font-size:12px;font-weight:600;text-align:center;border:1px solid rgba(40,84,161,.15)">Voir sur Géoportail →</a></div>'
+    ).openOn(carteMap);
+  });
+  MISSIONS.forEach(m=>{
+    const tags=m.tags.map(t=>`<span class="map-popup-tag">${t}</span>`).join('');
+    const btnOnclick=`openModal('${m.modalId}');document.querySelectorAll('.leaflet-popup').forEach(p=>p.remove())`;
+    const pop=L.popup({maxWidth:270}).setContent(`<div style="padding:12px 14px"><div style="font-size:9.5px;font-weight:600;color:#00a878;letter-spacing:.14em;text-transform:uppercase;font-family:Outfit,sans-serif;margin-bottom:4px">${m.typeLabel}</div><div style="font-family:Outfit,sans-serif;font-size:13.5px;font-weight:600;color:#1d3d7a;margin-bottom:4px;line-height:1.3">${m.titre}</div><div style="font-size:11.5px;color:#5a6a80;display:flex;gap:8px"><span>📅 ${m.date}</span><span>📍 Guadeloupe</span></div><div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:4px">${tags}</div><button class="map-popup-btn" onclick="${btnOnclick}">Voir la fiche →</button></div>`);
+    const mk=L.marker([m.lat,m.lng],{icon:buildIcon(),zIndexOffset:1000}).bindPopup(pop);
+    mk._missionType=m.type;mk.addTo(carteMap);allMarkers.push(mk);
+  });
+  allMarkers.forEach(mk=>{mk.on('click',e=>{L.DomEvent.stopPropagation(e);});});
+  setTimeout(()=>carteMap.invalidateSize(),200);
+}
+function toggleUAS(cb){if(!carteMap||!uasWmtsLayer)return;cb.checked?carteMap.addLayer(uasWmtsLayer):carteMap.removeLayer(uasWmtsLayer);}
+function switchBasemap(type){if(!carteMap||currentBase===type)return;carteMap.removeLayer(baseLayers[currentBase]);baseLayers[type].addTo(carteMap);baseLayers[type].bringToBack();if(uasWmtsLayer&&carteMap.hasLayer(uasWmtsLayer))uasWmtsLayer.bringToFront();currentBase=type;document.querySelectorAll('.basemap-btn').forEach(b=>b.classList.remove('active'));document.getElementById('bm-'+type).classList.add('active');}
+function filterMap(type,btn){document.querySelectorAll('.map-filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');allMarkers.forEach(mk=>{(type==='all'||mk._missionType===type)?mk.addTo(carteMap):carteMap.removeLayer(mk);});}
+
+document.addEventListener('DOMContentLoaded',()=>{initCarte();
+  const els=document.querySelectorAll('.map-action-card');
+  els.forEach(el=>{el.classList.add('reveal');const siblings=el.parentElement?.children;if(siblings){const idx=Array.from(siblings).indexOf(el);if(idx>=0&&idx<6)el.classList.add('reveal-delay-'+(idx+1));}});
+  const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+  els.forEach(el=>io.observe(el));
+});
+</script>
+</body>
+</html>

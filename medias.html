@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photos et vidéos drone en Guadeloupe — Galerie aérienne | KanaloEye</title>
+  <meta name="description" content="Galerie de photos et vidéos aériennes par drone en Guadeloupe : littoral, agriculture, patrimoine, inspections techniques. Images 4K captées par KanaloEye.">
+  <link rel="canonical" href="https://www.kanaloeye.com/medias.html">
+  <meta property="og:title" content="Photos et vidéos drone en Guadeloupe — KanaloEye">
+  <meta property="og:description" content="Galerie aérienne : photos et vidéos captées par drone professionnel en Guadeloupe et Antilles françaises.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.kanaloeye.com/medias.html">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:image" content="https://www.kanaloeye.com/Images_site/IMG_Littoral.JPG">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html">
+    <img src="Images_site/logo.png" alt="KanaloEye — Drone professionnel Guadeloupe">
+    <div class="logo-text">Kanalo<span>Eye</span></div>
+  </a>
+  <div class="nav-links" id="nav-links">
+    <a class="nav-link" href="index.html">Accueil</a>
+    <a class="nav-link" href="services.html">Services</a>
+    <a class="nav-link" href="realisations.html">Réalisations</a>
+    <a class="nav-link active" aria-current="page" href="medias.html">Médias</a>
+    <a class="nav-link" href="carte.html">Carte</a>
+    <a class="nav-link" href="a-propos.html">À propos</a>
+    <a class="nav-cta" href="contact.html">Contact</a>
+  </div>
+  <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<main class="page-content">
+  <div class="media-page-hero">
+    <div class="section-label" style="color:var(--em2);justify-content:center;display:flex">Galerie</div>
+    <h1 style="font-family:'Outfit',sans-serif;font-size:clamp(22px,4vw,36px);font-weight:700;color:#fff;margin-bottom:.6rem">Photos et vidéos drone en Guadeloupe</h1>
+    <p style="font-size:14px;color:rgba(255,255,255,.65);font-weight:300">Images et vidéos captées lors de missions en Guadeloupe et dans les Antilles françaises.</p>
+  </div>
+
+  <div class="carousel-section">
+    <div class="cs-label">Vidéos</div>
+    <h2 class="cs-title">Missions filmées par drone</h2>
+    <div class="carousel-track-wrap">
+      <div class="carousel-track" id="track-videos">
+        <div class="carousel-item video-item" onclick="openLightbox('Videos_site/VD_moulin.mp4','Survol du Moulin — Petit-Canal','video')">
+          <img src="Images_site/IMG_moulin.jpg" alt="Vidéo drone du moulin de Petit-Canal en Guadeloupe">
+          <div class="ci-badge">▶ Vidéo</div>
+          <div class="ci-overlay"><div class="ci-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><span>Lire</span></div>
+          <div class="ci-caption">Survol du Moulin — Petit-Canal</div>
+        </div>
+        <div class="carousel-item video-item" onclick="openLightbox('Videos_site/VD_enaction.mp4','Drone en action','video')">
+          <img src="Images_site/IMG_M3M2.jpg" alt="Drone DJI M3M Multispectral en action en Guadeloupe">
+          <div class="ci-badge">▶ Vidéo</div>
+          <div class="ci-overlay"><div class="ci-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><span>Lire</span></div>
+          <div class="ci-caption">Drone en action — DJI M3M</div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-dots" id="dots-videos"></div>
+  </div>
+
+  <div class="carousel-section" style="background:var(--bg)">
+    <div class="cs-label">Terrain & Environnement</div>
+    <h2 class="cs-title">Nature et paysages de Guadeloupe</h2>
+    <div class="carousel-track-wrap">
+      <div class="carousel-track" id="track-nature">
+        <div class="carousel-item" onclick="openLightbox('Images_site/IMG_Littoral.JPG','Littoral — Guadeloupe')">
+          <img src="Images_site/IMG_Littoral.JPG" alt="Vue aérienne par drone du littoral guadeloupéen">
+          <div class="ci-badge">Photo</div>
+          <div class="ci-overlay"><span>Agrandir</span></div>
+          <div class="ci-caption">Littoral — Guadeloupe</div>
+        </div>
+        <div class="carousel-item" onclick="openLightbox('Images_site/IMG_zone_humide.JPG','Zone humide')">
+          <img src="Images_site/IMG_zone_humide.JPG" alt="Survol drone d'une zone humide en Guadeloupe">
+          <div class="ci-badge">Photo</div>
+          <div class="ci-overlay"><span>Agrandir</span></div>
+          <div class="ci-caption">Zone humide</div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-dots" id="dots-nature"></div>
+  </div>
+
+  <div class="carousel-section" style="background:#fff">
+    <div class="cs-label">Agriculture</div>
+    <h2 class="cs-title">Cultures et végétation en Guadeloupe</h2>
+    <div class="carousel-track-wrap">
+      <div class="carousel-track" id="track-agri">
+        <div class="carousel-item" onclick="openLightbox('Images_site/IMG_bananerais.JPG','Bananerais')">
+          <img src="Images_site/IMG_bananerais.JPG" alt="Survol drone d'une bananerais en Guadeloupe — agriculture de précision">
+          <div class="ci-badge">Photo</div>
+          <div class="ci-overlay"><span>Agrandir</span></div>
+          <div class="ci-caption">Bananerais — survol</div>
+        </div>
+        <div class="carousel-item" onclick="openLightbox('Images_site/IMG_agriculture.JPG','Agriculture')">
+          <img src="Images_site/IMG_agriculture.JPG" alt="Analyse agricole par drone multispectral en Guadeloupe">
+          <div class="ci-badge">Photo</div>
+          <div class="ci-overlay"><span>Agrandir</span></div>
+          <div class="ci-caption">Agriculture</div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-dots" id="dots-agri"></div>
+  </div>
+
+  <div class="carousel-section" style="background:var(--bg)">
+    <div class="cs-label">Technique & BTP</div>
+    <h2 class="cs-title">Inspection et habitations en Guadeloupe</h2>
+    <div class="carousel-track-wrap">
+      <div class="carousel-track" id="track-tech">
+        <div class="carousel-item" onclick="openLightbox('Images_site/IMG_construction.JPG','Habitation')">
+          <img src="Images_site/IMG_construction.JPG" alt="Inspection drone d'une habitation en construction en Guadeloupe">
+          <div class="ci-badge">Photo</div>
+          <div class="ci-overlay"><span>Agrandir</span></div>
+          <div class="ci-caption">Habitation</div>
+        </div>
+        <div class="carousel-item" onclick="openLightbox('Images_site/IMG_moulin.jpg','Moulin — Petit-Canal')">
+          <img src="Images_site/IMG_moulin.jpg" alt="Photogrammétrie drone du moulin de Petit-Canal en Guadeloupe">
+          <div class="ci-badge">Photo</div>
+          <div class="ci-overlay"><span>Agrandir</span></div>
+          <div class="ci-caption">Moulin — Petit-Canal</div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-dots" id="dots-tech"></div>
+  </div>
+</main>
+
+<footer style="margin-top:2rem">
+  <div class="footer-inner">
+    <div>© 2026 <span>KanaloEye</span> — Tous droits réservés</div>
+    <div class="footer-links">
+      <a href="contact.html">Contact</a>
+      <a href="tel:+590690057897">+590 690 05 78 97</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Lightbox -->
+<div class="lightbox-overlay" id="lightbox" onclick="closeLightboxOutside(event)">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <div id="lightbox-content"></div>
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+</div>
+
+<script>
+function toggleMenu(){document.getElementById('nav-links').classList.toggle('open');document.getElementById('hamburger').classList.toggle('open');}
+
+function initCarousel(trackId, dotsId) {
+  const track = document.getElementById(trackId);
+  if (!track) return;
+  const dotsContainer = document.getElementById(dotsId);
+  if (dotsContainer) dotsContainer.style.display = 'none';
+  let isDragging = false, startX = 0, scrollStart = 0;
+  track.addEventListener('mousedown', e => { isDragging=true; startX=e.pageX-track.offsetLeft; scrollStart=track.scrollLeft; track.style.cursor='grabbing'; track.style.userSelect='none'; });
+  window.addEventListener('mousemove', e => { if(!isDragging)return; e.preventDefault(); track.scrollLeft=scrollStart-(e.pageX-track.offsetLeft-startX); });
+  window.addEventListener('mouseup', () => { isDragging=false; track.style.cursor='grab'; track.style.userSelect=''; });
+  track.style.cursor='grab';
+  track.addEventListener('click', e => { if(Math.abs(track.scrollLeft-scrollStart)>5) e.stopPropagation(); }, true);
+}
+
+function openLightbox(src,caption,type='image'){const c=document.getElementById('lightbox-content');c.innerHTML=type==='video'?`<video src="${src}" controls autoplay style="width:100%;border-radius:12px;max-height:85vh;outline:none"></video>`:`<img src="${src}" alt="${caption}" style="width:100%;border-radius:12px;max-height:85vh;object-fit:contain">`;document.getElementById('lightbox-caption').textContent=caption;document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';}
+function closeLightbox(){const lb=document.getElementById('lightbox');lb.classList.remove('open');document.body.style.overflow='';const v=lb.querySelector('video');if(v)v.pause();document.getElementById('lightbox-content').innerHTML='';}
+function closeLightboxOutside(e){if(e.target===document.getElementById('lightbox'))closeLightbox();}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();});
+
+document.addEventListener('DOMContentLoaded', () => {
+  initCarousel('track-videos','dots-videos');
+  initCarousel('track-nature','dots-nature');
+  initCarousel('track-agri','dots-agri');
+  initCarousel('track-tech','dots-tech');
+  const els = document.querySelectorAll('.carousel-item');
+  els.forEach(el => { el.classList.add('reveal'); const siblings=el.parentElement?.children; if(siblings){const idx=Array.from(siblings).indexOf(el);if(idx>=0&&idx<6)el.classList.add('reveal-delay-'+(idx+1));} });
+  const io = new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+  els.forEach(el=>io.observe(el));
+});
+</script>
+</body>
+</html>
