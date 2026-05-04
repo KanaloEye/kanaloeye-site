@@ -6,18 +6,13 @@
   <title>Carte des interventions drone en Guadeloupe — Zones de vol | KanaloEye</title>
   <meta name="description" content="Carte interactive des missions drone KanaloEye en Guadeloupe avec les restrictions de vol DGAC. Visualisez nos interventions et vérifiez les zones autorisées pour le drone.">
   <link rel="canonical" href="https://www.kanaloeye.fr/carte.html">
-  <meta name="geo.region" content="GP">
-  <meta name="geo.placename" content="Guadeloupe">
   <meta property="og:title" content="Carte des interventions drone en Guadeloupe — KanaloEye">
   <meta property="og:description" content="Carte interactive des missions drone et restrictions de vol DGAC en Guadeloupe et Antilles françaises.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.kanaloeye.fr/carte.html">
   <meta property="og:locale" content="fr_FR">
-  <meta property="og:site_name" content="KanaloEye">
   <meta property="og:image" content="https://www.kanaloeye.fr/Images_site/IMG_moulin.jpg">
-  <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -27,7 +22,7 @@
 
 <nav>
   <a class="logo" href="index.html">
-    <img src="Images_site/logo.png" alt="KanaloEye — Drone professionnel Guadeloupe" width="52" height="52">
+    <img src="Images_site/logo.png" alt="KanaloEye — Drone professionnel Guadeloupe">
     <div class="logo-text">Kanalo<span>Eye</span></div>
   </a>
   <div class="nav-links" id="nav-links">
@@ -69,12 +64,7 @@
         Me localiser
       </button>
 
-      <button class="map-panel-toggle" id="panel-toggle" onclick="toggleMapPanel()">
-        <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
-        Légende & filtres
-      </button>
-
-      <div class="map-inset-panel" id="map-panel">
+      <div class="map-inset-panel">
         <div>
           <div class="mip-label">Couche DGAC</div>
           <div class="map-uas-toggle">
@@ -152,14 +142,6 @@
 
 <script>
 function toggleMenu(){document.getElementById('nav-links').classList.toggle('open');document.getElementById('hamburger').classList.toggle('open');}
-function toggleMapPanel(){
-  const panel=document.getElementById('map-panel');
-  const btn=document.getElementById('panel-toggle');
-  panel.classList.toggle('mobile-open');
-  btn.classList.toggle('panel-open');
-  btn.textContent=panel.classList.contains('mobile-open')?'':'';
-  btn.innerHTML=(panel.classList.contains('mobile-open')?'<svg viewBox="0 0 24 24"><path d="M7 14l5-5 5 5z"/></svg> Fermer':'<svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg> Légende & filtres');
-}
 
 const PROJETS = {
   moulin:{label:'Modélisation 3D — Patrimoine',title:'Modélisation 3D du moulin à vent de Petit-Canal',img:'Images_site/IMG_moulin.jpg',emoji:'🏛️',texts:["Nous avons réalisé une capture dans le temps d'un moulin à vent de Petit-Canal grâce à notre drone.","Les moulins à vent ont été utilisés en Guadeloupe dès le XVIIe siècle pour broyer les cannes à sucre.","Aujourd'hui, ils restent des témoins importants du patrimoine guadeloupéen."],tags:['Modélisation 3D','Patrimoine','Grande-Terre','Photogrammétrie']},
@@ -202,7 +184,7 @@ function geolocateUser(){
 
 function initCarte(){
   if(carteMap){setTimeout(()=>carteMap.invalidateSize(),150);return;}
-  carteMap=L.map('map',{zoomControl:false,scrollWheelZoom:false,tap:true,dragging:true}).setView([16.25,-61.55],10);
+  carteMap=L.map('map',{zoomControl:false,scrollWheelZoom:false}).setView([16.25,-61.55],10);
   L.control.zoom({position:'bottomright'}).addTo(carteMap);
   carteMap.getContainer().addEventListener('mouseenter',()=>carteMap.scrollWheelZoom.enable());
   carteMap.getContainer().addEventListener('mouseleave',()=>carteMap.scrollWheelZoom.disable());
