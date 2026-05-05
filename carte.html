@@ -65,41 +65,45 @@
         Me localiser
       </button>
 
-      <div class="map-inset-panel">
-        <div>
-          <div class="mip-label">Couche DGAC</div>
-          <div class="map-uas-toggle">
-            <label class="toggle-switch">
-              <input type="checkbox" id="uas-toggle" checked onchange="toggleUAS(this)">
-              <span class="toggle-slider"></span>
-            </label>
-            <span class="toggle-label">Restrictions <strong>UAS/IGN</strong></span>
-          </div>
+      </div>
+    </div>
+
+    <button class="map-legend-toggle" onclick="document.querySelector('.map-inset-panel').classList.toggle('mobile-open');this.textContent=this.textContent.includes('Afficher')?'Masquer la légende ▲':'Afficher la légende ▼'">Afficher la légende ▼</button>
+
+    <div class="map-inset-panel">
+      <div>
+        <div class="mip-label">Couche DGAC</div>
+        <div class="map-uas-toggle">
+          <label class="toggle-switch">
+            <input type="checkbox" id="uas-toggle" checked onchange="toggleUAS(this)">
+            <span class="toggle-slider"></span>
+          </label>
+          <span class="toggle-label">Restrictions <strong>UAS/IGN</strong></span>
         </div>
-        <div class="mip-divider"></div>
-        <div>
-          <div class="mip-label">Signification des couleurs</div>
-          <div class="ucl-items">
-            <div class="ucl-item"><div class="ucl-dot" style="background:#d62839"><span class="ucl-pulse"></span></div><div><strong>Rouge</strong> — Vol interdit <sup>*</sup></div></div>
-            <div class="ucl-item"><div class="ucl-dot" style="background:#f4a5a8"></div><div><strong>Rouge pastel</strong> — Hauteur max 30 m <sup>*</sup></div></div>
-            <div class="ucl-item"><div class="ucl-dot" style="background:#e8850a"></div><div><strong>Orange</strong> — Hauteur max 50 m <sup>*</sup></div></div>
-            <div class="ucl-item"><div class="ucl-dot" style="background:#f5c400"></div><div><strong>Jaune</strong> — Hauteur max 100 m <sup>*</sup></div></div>
-            <div class="ucl-item"><div class="ucl-dot" style="background:#e0e0e0;border:1px solid #bbb"></div><div><strong>Blanc</strong> — Zone libre</div></div>
-          </div>
-          <div class="ucl-footnote"><sup>*</sup> Règles hors demande d'autorisation particulière</div>
+      </div>
+      <div class="mip-divider"></div>
+      <div>
+        <div class="mip-label">Signification des couleurs</div>
+        <div class="ucl-items">
+          <div class="ucl-item"><div class="ucl-dot" style="background:#d62839"><span class="ucl-pulse"></span></div><div><strong>Rouge</strong> — Vol interdit <sup>*</sup></div></div>
+          <div class="ucl-item"><div class="ucl-dot" style="background:#f4a5a8"></div><div><strong>Rouge pastel</strong> — Hauteur max 30 m <sup>*</sup></div></div>
+          <div class="ucl-item"><div class="ucl-dot" style="background:#e8850a"></div><div><strong>Orange</strong> — Hauteur max 50 m <sup>*</sup></div></div>
+          <div class="ucl-item"><div class="ucl-dot" style="background:#f5c400"></div><div><strong>Jaune</strong> — Hauteur max 100 m <sup>*</sup></div></div>
+          <div class="ucl-item"><div class="ucl-dot" style="background:#e0e0e0;border:1px solid #bbb"></div><div><strong>Blanc</strong> — Zone libre</div></div>
         </div>
-        <div class="mip-divider"></div>
-        <div>
-          <div class="mip-label">Missions</div>
-          <div class="map-filters">
-            <button class="map-filter-btn active" onclick="filterMap('all',this)">Toutes</button>
-            <button class="map-filter-btn" onclick="filterMap('modelisation',this)">3D</button>
-            <button class="map-filter-btn" onclick="filterMap('inspection',this)">Inspection</button>
-            <button class="map-filter-btn" onclick="filterMap('cartographie',this)">Carto</button>
-          </div>
-          <div class="map-leg-item" style="margin-top:.5rem">
-            <div class="map-dot map-dot-mission"></div>Marqueur mission — cliquer
-          </div>
+        <div class="ucl-footnote"><sup>*</sup> Règles hors demande d'autorisation particulière</div>
+      </div>
+      <div class="mip-divider"></div>
+      <div>
+        <div class="mip-label">Missions</div>
+        <div class="map-filters">
+          <button class="map-filter-btn active" onclick="filterMap('all',this)">Toutes</button>
+          <button class="map-filter-btn" onclick="filterMap('modelisation',this)">3D</button>
+          <button class="map-filter-btn" onclick="filterMap('inspection',this)">Inspection</button>
+          <button class="map-filter-btn" onclick="filterMap('cartographie',this)">Carto</button>
+        </div>
+        <div class="map-leg-item" style="margin-top:.5rem">
+          <div class="map-dot map-dot-mission"></div>Marqueur mission — cliquer
         </div>
       </div>
     </div>
