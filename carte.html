@@ -16,7 +16,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
 
@@ -65,14 +65,9 @@
         Me localiser
       </button>
 
-      </div>
-    </div>
-
-    <button class="map-legend-toggle" onclick="document.querySelector('.map-inset-panel').classList.toggle('mobile-open');this.textContent=this.textContent.includes('Afficher')?'Masquer la légende ▲':'Afficher la légende ▼'">Afficher la légende ▼</button>
-
-    <div class="map-inset-panel">
-      <div>
-        <div class="mip-label">Couche DGAC</div>
+      <div class="map-inset-panel" id="map-panel">
+        <div>
+          <div class="mip-label">Couche DGAC</div>
         <div class="map-uas-toggle">
           <label class="toggle-switch">
             <input type="checkbox" id="uas-toggle" checked onchange="toggleUAS(this)">
@@ -106,7 +101,10 @@
           <div class="map-dot map-dot-mission"></div>Marqueur mission — cliquer
         </div>
       </div>
+      </div>
     </div>
+
+    <button class="map-legend-toggle" id="legend-toggle" onclick="var p=document.getElementById('map-panel');p.classList.toggle('mobile-open');this.textContent=this.textContent.includes('Afficher')?'Masquer la légende ▲':'Afficher la légende ▼'">Afficher la légende ▼</button>
 
     <div class="map-actions-bar">
       <div class="map-action-card map-action-alphatango">
