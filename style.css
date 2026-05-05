@@ -650,3 +650,9 @@
     .article-back{display:inline-block;font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;color:var(--blue);text-decoration:none;margin-bottom:1rem;transition:color .2s}
     .article-back:hover{color:var(--emerald)}
     @media(max-width:600px){.blog-grid{grid-template-columns:1fr;padding:1.2rem}.article-content{padding:0 1.2rem 2rem}}
+
+    /* ══ FOOTER LEGAL LINKS ══ */
+    .footer-links a[href="mentions-legales.html"],
+    .footer-links a[href="cgv.html"]{font-size:11px;opacity:.5}
+    .footer-links a[href="mentions-legales.html"]:hover,
+    .footer-links a[href="cgv.html"]:hover{opacity:.8}
