@@ -11,18 +11,18 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.kanaloeye.fr/carte.html">
   <meta property="og:locale" content="fr_FR">
-  <meta property="og:image" content="https://www.kanaloeye.fr/Images_site/IMG_moulin.jpg">
+  <meta property="og:image" content="https://www.kanaloeye.fr/Images_site/IMG_moulin.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <link rel="stylesheet" href="style.css?v=3">
+  <link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
 
 <nav>
   <a class="logo" href="index.html">
-    <img src="Images_site/logo.png" alt="KanaloEye — Drone professionnel Guadeloupe">
+    <img src="Images_site/logo.webp" alt="KanaloEye — Drone professionnel Guadeloupe">
     <div class="logo-text">Kanalo<span>Eye</span></div>
   </a>
   <div class="nav-links" id="nav-links">
@@ -147,11 +147,11 @@
 function toggleMenu(){document.getElementById('nav-links').classList.toggle('open');document.getElementById('hamburger').classList.toggle('open');}
 
 const PROJETS = {
-  moulin:{label:'Modélisation 3D — Patrimoine',title:'Modélisation 3D du moulin à vent de Petit-Canal',img:'Images_site/IMG_moulin.jpg',emoji:'🏛️',texts:["Nous avons réalisé une capture dans le temps d'un moulin à vent de Petit-Canal grâce à notre drone.","Les moulins à vent ont été utilisés en Guadeloupe dès le XVIIe siècle pour broyer les cannes à sucre.","Aujourd'hui, ils restent des témoins importants du patrimoine guadeloupéen."],tags:['Modélisation 3D','Patrimoine','Grande-Terre','Photogrammétrie']},
-  eolienne:{label:'Inspection technique — Énergie',title:"Inspection par drone d'une éolienne",img:'Images_site/IMG_eolienne.jpg',emoji:'💨',texts:["Inspection complète d'une éolienne par drone, contrôle visuel haute définition des pales.","Livrable : rapport photographique géolocalisé."],tags:['Inspection','Éolienne','Énergie','Rapport HD']},
-  solaire:{label:'Cartographie — Énergie solaire',title:"Orthophotographie d'un champ de panneaux solaires",img:'Images_site/IMG_ortho photovoltaique PC.png',emoji:'☀️',texts:["Cartographie aérienne haute résolution d'un parc photovoltaïque.","Livrable : orthomosaïque géoréférencée."],tags:['Orthophotos','Solaire','Cartographie']}
+  moulin:{label:'Modélisation 3D — Patrimoine',title:'Modélisation 3D du moulin à vent de Petit-Canal',img:'Images_site/IMG_moulin.webp',emoji:'🏛️',texts:["Nous avons réalisé une capture dans le temps d'un moulin à vent de Petit-Canal grâce à notre drone.","Les moulins à vent ont été utilisés en Guadeloupe dès le XVIIe siècle pour broyer les cannes à sucre.","Aujourd'hui, ils restent des témoins importants du patrimoine guadeloupéen."],tags:['Modélisation 3D','Patrimoine','Grande-Terre','Photogrammétrie']},
+  eolienne:{label:'Inspection technique — Énergie',title:"Inspection par drone d'une éolienne",img:'Images_site/IMG_eolienne.webp',emoji:'💨',texts:["Inspection complète d'une éolienne par drone, contrôle visuel haute définition des pales.","Livrable : rapport photographique géolocalisé."],tags:['Inspection','Éolienne','Énergie','Rapport HD']},
+  solaire:{label:'Cartographie — Énergie solaire',title:"Orthophotographie d'un champ de panneaux solaires",img:'Images_site/IMG_ortho_photovoltaique_PC.webp',emoji:'☀️',texts:["Cartographie aérienne haute résolution d'un parc photovoltaïque.","Livrable : orthomosaïque géoréférencée."],tags:['Orthophotos','Solaire','Cartographie']}
 };
-function openModal(id){const p=PROJETS[id];if(!p)return;document.getElementById('modal-content').innerHTML=`<img class="modal-img" src="${p.img}" alt="${p.title}" onerror="this.outerHTML='<div class=modal-img-placeholder>${p.emoji}</div>'"><div class="modal-body"><div class="modal-label">${p.label}</div><div class="modal-title">${p.title}</div>${p.texts.map(t=>`<p class="modal-text">${t}</p>`).join('')}<div class="modal-tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></div>`;document.getElementById('modal').classList.add('open');document.body.style.overflow='hidden';}
+function openModal(id){const p=PROJETS[id];if(!p)return;document.getElementById('modal-content').innerHTML=`<img loading="lazy" class="modal-img" src="${p.img}" alt="${p.title}" onerror="this.outerHTML='<div class=modal-img-placeholder>${p.emoji}</div>'"><div class="modal-body"><div class="modal-label">${p.label}</div><div class="modal-title">${p.title}</div>${p.texts.map(t=>`<p class="modal-text">${t}</p>`).join('')}<div class="modal-tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></div>`;document.getElementById('modal').classList.add('open');document.body.style.overflow='hidden';}
 function closeModal(){document.getElementById('modal').classList.remove('open');document.body.style.overflow='';document.getElementById('modal-content').innerHTML='';}
 function closeModalOutside(e){if(e.target===document.getElementById('modal'))closeModal();}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});

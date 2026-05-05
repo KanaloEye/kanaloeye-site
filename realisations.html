@@ -11,16 +11,16 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.kanaloeye.fr/realisations.html">
   <meta property="og:locale" content="fr_FR">
-  <meta property="og:image" content="https://www.kanaloeye.fr/Images_site/IMG_moulin.jpg">
+  <meta property="og:image" content="https://www.kanaloeye.fr/Images_site/IMG_moulin.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=3">
+  <link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
 
 <nav>
   <a class="logo" href="index.html">
-    <img src="Images_site/logo.png" alt="KanaloEye — Drone professionnel Guadeloupe">
+    <img src="Images_site/logo.webp" alt="KanaloEye — Drone professionnel Guadeloupe">
     <div class="logo-text">Kanalo<span>Eye</span></div>
   </a>
   <div class="nav-links" id="nav-links">
@@ -45,7 +45,7 @@
     <p class="section-sub">Missions menées en Guadeloupe et dans les Antilles françaises. Cliquez sur une réalisation pour en savoir plus, ou consultez la <a href="carte.html" style="color:var(--blue);text-decoration:underline">carte des interventions</a> pour les localiser.</p>
     <div class="real-grid">
       <div class="real-card" onclick="openModal('moulin')">
-        <div class="real-thumb"><img src="Images_site/IMG_moulin.jpg" alt="Modélisation 3D par drone du moulin historique de Petit-Canal en Guadeloupe" onerror="this.parentElement.innerHTML='<div class=real-thumb-placeholder>🏛️</div>'"></div>
+        <div class="real-thumb"><img loading="lazy" src="Images_site/IMG_moulin.webp" alt="Modélisation 3D par drone du moulin historique de Petit-Canal en Guadeloupe" onerror="this.parentElement.innerHTML='<div class=real-thumb-placeholder>🏛️</div>'"></div>
         <div class="real-body">
           <h2>Modélisation 3D — Moulin de Petit-Canal</h2>
           <p>Capture et modélisation d'un moulin à vent historique, témoin du patrimoine sucrier guadeloupéen.</p>
@@ -53,7 +53,7 @@
         </div>
       </div>
       <div class="real-card" onclick="openModal('eolienne')">
-        <div class="real-thumb"><img src="Images_site/IMG_eolienne.JPG" alt="Inspection par drone d'une éolienne en Guadeloupe" onerror="this.parentElement.innerHTML='<div class=real-thumb-placeholder>💨</div>'"></div>
+        <div class="real-thumb"><img loading="lazy" src="Images_site/IMG_eolienne.webp" alt="Inspection par drone d'une éolienne en Guadeloupe" onerror="this.parentElement.innerHTML='<div class=real-thumb-placeholder>💨</div>'"></div>
         <div class="real-body">
           <h2>Inspection technique — Éolienne</h2>
           <p>Contrôle visuel par drone des pales et de la structure, sans intervention humaine en hauteur.</p>
@@ -61,7 +61,7 @@
         </div>
       </div>
       <div class="real-card" onclick="openModal('solaire')">
-        <div class="real-thumb"><img src="Images_site/IMG_ortho photovoltaique PC.png" alt="Orthophotographie par drone d'un parc photovoltaïque en Guadeloupe" onerror="this.parentElement.innerHTML='<div class=real-thumb-placeholder>☀️</div>'"></div>
+        <div class="real-thumb"><img loading="lazy" src="Images_site/IMG_ortho_photovoltaique_PC.webp" alt="Orthophotographie par drone d'un parc photovoltaïque en Guadeloupe" onerror="this.parentElement.innerHTML='<div class=real-thumb-placeholder>☀️</div>'"></div>
         <div class="real-body">
           <h2>Orthophotographie — Champ solaire</h2>
           <p>Cartographie haute résolution d'un parc photovoltaïque et détection thermique des panneaux défaillants.</p>
@@ -91,11 +91,11 @@
 function toggleMenu(){document.getElementById('nav-links').classList.toggle('open');document.getElementById('hamburger').classList.toggle('open');}
 
 const PROJETS = {
-  moulin:{label:'Modélisation 3D — Patrimoine',title:'Modélisation 3D du moulin à vent de Petit-Canal',img:'Images_site/IMG_moulin.jpg',emoji:'🏛️',texts:["Nous avons réalisé une capture dans le temps d'un moulin à vent de Petit-Canal grâce à notre drone.","Les moulins à vent ont été utilisés en Guadeloupe dès le XVIIe siècle pour broyer les cannes à sucre. Construits en pierre, ils exploitaient la force du vent pour actionner un pressoir et transformer la canne en jus, étape indispensable à la production de sucre.","Avant l'arrivée des machines à vapeur, ces moulins étaient essentiels pour le travail agricole et structuraient le paysage local. Aujourd'hui, ils restent des témoins importants du patrimoine guadeloupéen de la Grande-Terre et de Marie-Galante."],tags:['Modélisation 3D','Patrimoine','Grande-Terre','Photogrammétrie']},
-  eolienne:{label:'Inspection technique — Énergie',title:"Inspection par drone d'une éolienne",img:'Images_site/IMG_eolienne.jpg',emoji:'💨',texts:["Nous avons réalisé l'inspection complète d'une éolienne par drone, permettant un contrôle visuel haute définition des pales, du moyeu et de la nacelle sans immobilisation prolongée ni intervention humaine en hauteur.","Cette approche réduit considérablement les risques liés aux travaux en hauteur et divise par trois le temps d'inspection par rapport aux méthodes traditionnelles.","Livrable : rapport photographique géolocalisé avec identification des anomalies (fissures, érosion, délaminage) et recommandations de maintenance. Délai de livraison : 48h après la mission."],tags:['Inspection','Éolienne','Énergie','Rapport HD','Sécurité']},
-  solaire:{label:'Cartographie — Énergie solaire',title:"Orthophotographie d'un champ de panneaux solaires",img:'Images_site/IMG_ortho photovoltaique PC.png',emoji:'☀️',texts:["Mission de cartographie aérienne haute résolution d'un parc photovoltaïque. L'orthomosaïque produite permet une vue d'ensemble précise et facilite la gestion de maintenance.","Grâce à l'imagerie thermique couplée à l'orthophoto, nous avons pu identifier les panneaux présentant des dommages physiques (impacts, fissures), réduisant le temps de diagnostic.","Livrable : orthomosaïque géoréférencée, cartographie à l'échelle, rapport des panneaux à inspecter en priorité."],tags:['Orthophotos','Solaire','Cartographie','Maintenance']}
+  moulin:{label:'Modélisation 3D — Patrimoine',title:'Modélisation 3D du moulin à vent de Petit-Canal',img:'Images_site/IMG_moulin.webp',emoji:'🏛️',texts:["Nous avons réalisé une capture dans le temps d'un moulin à vent de Petit-Canal grâce à notre drone.","Les moulins à vent ont été utilisés en Guadeloupe dès le XVIIe siècle pour broyer les cannes à sucre. Construits en pierre, ils exploitaient la force du vent pour actionner un pressoir et transformer la canne en jus, étape indispensable à la production de sucre.","Avant l'arrivée des machines à vapeur, ces moulins étaient essentiels pour le travail agricole et structuraient le paysage local. Aujourd'hui, ils restent des témoins importants du patrimoine guadeloupéen de la Grande-Terre et de Marie-Galante."],tags:['Modélisation 3D','Patrimoine','Grande-Terre','Photogrammétrie']},
+  eolienne:{label:'Inspection technique — Énergie',title:"Inspection par drone d'une éolienne",img:'Images_site/IMG_eolienne.webp',emoji:'💨',texts:["Nous avons réalisé l'inspection complète d'une éolienne par drone, permettant un contrôle visuel haute définition des pales, du moyeu et de la nacelle sans immobilisation prolongée ni intervention humaine en hauteur.","Cette approche réduit considérablement les risques liés aux travaux en hauteur et divise par trois le temps d'inspection par rapport aux méthodes traditionnelles.","Livrable : rapport photographique géolocalisé avec identification des anomalies (fissures, érosion, délaminage) et recommandations de maintenance. Délai de livraison : 48h après la mission."],tags:['Inspection','Éolienne','Énergie','Rapport HD','Sécurité']},
+  solaire:{label:'Cartographie — Énergie solaire',title:"Orthophotographie d'un champ de panneaux solaires",img:'Images_site/IMG_ortho_photovoltaique_PC.webp',emoji:'☀️',texts:["Mission de cartographie aérienne haute résolution d'un parc photovoltaïque. L'orthomosaïque produite permet une vue d'ensemble précise et facilite la gestion de maintenance.","Grâce à l'imagerie thermique couplée à l'orthophoto, nous avons pu identifier les panneaux présentant des dommages physiques (impacts, fissures), réduisant le temps de diagnostic.","Livrable : orthomosaïque géoréférencée, cartographie à l'échelle, rapport des panneaux à inspecter en priorité."],tags:['Orthophotos','Solaire','Cartographie','Maintenance']}
 };
-function openModal(id){const p=PROJETS[id];if(!p)return;document.getElementById('modal-content').innerHTML=`<img class="modal-img" src="${p.img}" alt="${p.title}" onerror="this.outerHTML='<div class=modal-img-placeholder>${p.emoji}</div>'"><div class="modal-body"><div class="modal-label">${p.label}</div><div class="modal-title">${p.title}</div>${p.texts.map(t=>`<p class="modal-text">${t}</p>`).join('')}<div class="modal-tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></div>`;document.getElementById('modal').classList.add('open');document.body.style.overflow='hidden';}
+function openModal(id){const p=PROJETS[id];if(!p)return;document.getElementById('modal-content').innerHTML=`<img loading="lazy" class="modal-img" src="${p.img}" alt="${p.title}" onerror="this.outerHTML='<div class=modal-img-placeholder>${p.emoji}</div>'"><div class="modal-body"><div class="modal-label">${p.label}</div><div class="modal-title">${p.title}</div>${p.texts.map(t=>`<p class="modal-text">${t}</p>`).join('')}<div class="modal-tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></div>`;document.getElementById('modal').classList.add('open');document.body.style.overflow='hidden';}
 function closeModal(){document.getElementById('modal').classList.remove('open');document.body.style.overflow='';document.getElementById('modal-content').innerHTML='';}
 function closeModalOutside(e){if(e.target===document.getElementById('modal'))closeModal();}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
