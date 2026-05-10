@@ -175,6 +175,14 @@
     .carousel-track{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:0 1.5rem 1rem}
     @media(min-width:640px){.carousel-track{padding:0 2.5rem 1rem}}
     .carousel-track::-webkit-scrollbar{display:none}
+
+    /* ── Carousel mobile: scrollbar visible ── */
+    @media(max-width:768px){
+      .carousel-track{scrollbar-width:thin;scrollbar-color:var(--blue) var(--border);padding-bottom:1.2rem}
+      .carousel-track::-webkit-scrollbar{display:block;height:4px}
+      .carousel-track::-webkit-scrollbar-track{background:var(--border);border-radius:4px;margin:0 1.5rem}
+      .carousel-track::-webkit-scrollbar-thumb{background:linear-gradient(90deg,var(--blue),var(--emerald));border-radius:4px}
+    }
     .carousel-item{flex:0 0 auto;width:calc(100vw - 3rem);max-width:380px;scroll-snap-align:start;border-radius:13px;overflow:hidden;cursor:pointer;position:relative;background:var(--blue2);box-shadow:var(--shadow);transition:transform .2s}
     @media(min-width:600px){.carousel-item{width:340px}}
     @media(min-width:900px){.carousel-item{width:380px}}
