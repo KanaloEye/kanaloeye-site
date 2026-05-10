@@ -20,7 +20,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <link rel="stylesheet" href="style.css?v=9">
+  <link rel="stylesheet" href="style.css?v=10">
 </head>
 <body>
 
@@ -106,9 +106,9 @@
         </div>
       </div>
       </div>
-    </div>
 
-    <button class="map-legend-toggle" id="legend-toggle" onclick="var p=document.getElementById('map-panel');p.classList.toggle('mobile-open');this.textContent=this.textContent.includes('Afficher')?'Masquer la légende ▲':'Afficher la légende ▼'">Afficher la légende ▼</button>
+      <button class="map-legend-toggle" id="legend-toggle" onclick="var p=document.getElementById('map-panel');p.classList.toggle('mobile-open');this.textContent=this.textContent.includes('Afficher')?'Masquer la légende ▲':'Afficher la légende ▼'">Afficher la légende ▼</button>
+    </div>
 
     <div class="map-actions-bar">
       <div class="map-action-card map-action-alphatango">
@@ -193,7 +193,7 @@ function geolocateUser(){
 
 function initCarte(){
   if(carteMap){setTimeout(()=>carteMap.invalidateSize(),150);return;}
-  carteMap=L.map('map',{zoomControl:false,scrollWheelZoom:false}).setView([16.25,-61.55],10);
+  carteMap=L.map('map',{zoomControl:false,scrollWheelZoom:false,tap:true,tapTolerance:15}).setView([16.25,-61.55],10);
   L.control.zoom({position:'bottomright'}).addTo(carteMap);
   carteMap.getContainer().addEventListener('mouseenter',()=>carteMap.scrollWheelZoom.enable());
   carteMap.getContainer().addEventListener('mouseleave',()=>carteMap.scrollWheelZoom.disable());
