@@ -40,11 +40,14 @@
     .nav-link.active{background:var(--blue);color:#fff;font-weight:500}
     .nav-cta{background:var(--emerald);color:#fff;border:none;padding:10px 20px;border-radius:9px;font-family:'Outfit',sans-serif;font-weight:600;font-size:14px;cursor:pointer;transition:all .18s;white-space:nowrap;margin-left:8px}
     .nav-cta:hover{background:var(--em2);box-shadow:0 4px 16px rgba(0,168,120,.3)}
-    .nav-hamburger{display:none;background:none;border:none;cursor:pointer;padding:6px;flex-shrink:0}
-    .nav-hamburger span{display:block;width:22px;height:2px;background:var(--blue);margin:5px 0;border-radius:2px;transition:all .25s}
-    .nav-hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
-    .nav-hamburger.open span:nth-child(2){opacity:0}
-    .nav-hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+    .nav-hamburger{display:none;background:none;border:none;cursor:pointer;padding:6px;flex-shrink:0;position:relative;width:34px;height:32px}
+    .nav-hamburger span{display:block;width:22px;height:2px;background:var(--blue);border-radius:2px;transition:all .3s cubic-bezier(.4,0,.2,1);position:absolute;left:6px}
+    .nav-hamburger span:nth-child(1){top:6px}
+    .nav-hamburger span:nth-child(2){top:15px}
+    .nav-hamburger span:nth-child(3){top:24px}
+    .nav-hamburger.open span:nth-child(1){top:15px;transform:rotate(45deg)}
+    .nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+    .nav-hamburger.open span:nth-child(3){top:15px;transform:rotate(-45deg)}
 
     /* ══ PAGES ══ */
     
@@ -295,7 +298,7 @@
       .nav-links.open{display:flex}
       .nav-link{width:100%;text-align:left;padding:10px 14px}
       .nav-cta{width:100%;margin:6px 0 0;text-align:center;padding:11px}
-      .nav-hamburger{display:flex;flex-direction:column}
+      .nav-hamburger{display:block}
       .contact-layout{grid-template-columns:1fr}
       .about-grid{grid-template-columns:1fr}
       .tarifs-intro{flex-direction:column}
