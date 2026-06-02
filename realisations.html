@@ -56,6 +56,14 @@
           <div class="tags"><span class="tag">Modélisation 3D</span><span class="tag">Patrimoine</span><span class="tag">Grande-Terre</span></div>
         </div>
       </div>
+      <div class="real-card" onclick="openModal('villa')">
+        <div class="real-thumb"><img loading="lazy" src="https://media.sketchfab.com/models/6dc843b0e8c54cf98a8a51ec6b2827a2/thumbnails/e8c4cbb81648473188d0e119d75810fa/a49081dc5f0c496cb797ae896906edab.jpeg" alt="Modélisation 3D Villa Poucet par drone en Guadeloupe" onerror="this.parentElement.innerHTML='<div class=real-thumb-placeholder>🏡</div>'"></div>
+        <div class="real-body">
+          <h2>Modélisation 3D — Villa Poucet</h2>
+          <p>Modélisation 3D complète d'une villa par photogrammétrie drone. Visualisation interactive du bâtiment.</p>
+          <div class="tags"><span class="tag">Modélisation 3D</span><span class="tag">Architecture</span><span class="tag">Photogrammétrie</span></div>
+        </div>
+      </div>
       <div class="real-card" onclick="openModal('eolienne')">
         <div class="real-thumb"><img loading="lazy" src="Images_site/IMG_eolienne.webp" alt="Inspection par drone d'une éolienne en Guadeloupe" onerror="this.parentElement.innerHTML='<div class=real-thumb-placeholder>💨</div>'"></div>
         <div class="real-body">
@@ -98,10 +106,32 @@ function toggleMenu(){document.getElementById('nav-links').classList.toggle('ope
 
 const PROJETS = {
   moulin:{label:'Modélisation 3D — Patrimoine',title:'Modélisation 3D du moulin à vent de Petit-Canal',video:'Videos_site/VD_moulin.mp4',img:'Images_site/IMG_moulin.webp',emoji:'🏛️',texts:["Nous avons réalisé une capture dans le temps d'un moulin à vent de Petit-Canal grâce à notre drone.","Les moulins à vent ont été utilisés en Guadeloupe dès le XVIIe siècle pour broyer les cannes à sucre. Construits en pierre, ils exploitaient la force du vent pour actionner un pressoir et transformer la canne en jus, étape indispensable à la production de sucre.","Avant l'arrivée des machines à vapeur, ces moulins étaient essentiels pour le travail agricole et structuraient le paysage local. Aujourd'hui, ils restent des témoins importants du patrimoine guadeloupéen de la Grande-Terre et de Marie-Galante."],tags:['Modélisation 3D','Patrimoine','Grande-Terre','Photogrammétrie']},
+  villa:{label:'Modélisation 3D — Architecture',title:'Modélisation 3D de la Villa Poucet',sketchfab:'6dc843b0e8c54cf98a8a51ec6b2827a2',emoji:'🏡',texts:["Modélisation 3D complète d'une villa par photogrammétrie drone. Des centaines de photos aériennes ont été assemblées pour générer un modèle 3D précis et interactif du bâtiment.","Cette technique permet aux propriétaires, architectes ou promoteurs de visualiser un bien sous tous les angles, de réaliser des mesures précises et de documenter l'état d'un bâtiment à un instant donné.","Explorez le modèle ci-dessus en 3D — vous pouvez le faire pivoter, zoomer et naviguer librement autour de la villa."],tags:['Modélisation 3D','Architecture','Photogrammétrie','Villa']},
   eolienne:{label:'Inspection technique — Énergie',title:"Inspection par drone d'une éolienne",img:'Images_site/IMG_eolienne.webp',emoji:'💨',texts:["Nous avons réalisé l'inspection complète d'une éolienne par drone, permettant un contrôle visuel haute définition des pales, du moyeu et de la nacelle sans immobilisation prolongée ni intervention humaine en hauteur.","Cette approche réduit considérablement les risques liés aux travaux en hauteur et divise par trois le temps d'inspection par rapport aux méthodes traditionnelles.","Livrable : rapport photographique géolocalisé avec identification des anomalies (fissures, érosion, délaminage) et recommandations de maintenance. Délai de livraison : 48h après la mission."],tags:['Inspection','Éolienne','Énergie','Rapport HD','Sécurité']},
   solaire:{label:'Cartographie — Énergie solaire',title:"Orthophotographie d'un champ de panneaux solaires",img:'Images_site/IMG_ortho_photovoltaique_PC.webp',emoji:'☀️',texts:["Mission de cartographie aérienne haute résolution d'un parc photovoltaïque. L'orthomosaïque produite permet une vue d'ensemble précise et facilite la gestion de maintenance.","Grâce à l'orthophoto, nous avons pu identifier les panneaux présentant des dommages physiques (impacts, fissures), réduisant le temps de diagnostic.","Livrable : orthomosaïque géoréférencée, cartographie à l'échelle, rapport des panneaux à inspecter en priorité."],tags:['Orthophotos','Solaire','Cartographie','Maintenance']}
 };
-function openModal(id){const p=PROJETS[id];if(!p)return;const media=p.video?`<video class="modal-img" src="${p.video}" controls autoplay playsinline style="width:100%;border-radius:12px;max-height:60vh"></video>`:`<img loading="lazy" class="modal-img" src="${p.img}" alt="${p.title}" onerror="this.outerHTML='<div class=modal-img-placeholder>${p.emoji}</div>'">`;document.getElementById('modal-content').innerHTML=`${media}<div class="modal-body"><div class="modal-label">${p.label}</div><div class="modal-title">${p.title}</div>${p.texts.map(t=>`<p class="modal-text">${t}</p>`).join('')}<div class="modal-tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></div>`;document.getElementById('modal').classList.add('open');document.body.style.overflow='hidden';}
+
+function openModal(id){
+  const p=PROJETS[id];
+  if(!p)return;
+  let media;
+  if(p.sketchfab){
+    media=`<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;margin-bottom:16px;">
+      <iframe title="${p.title}" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"
+        src="https://sketchfab.com/models/${p.sketchfab}/embed?autostart=1&ui_hint=0"
+        allow="autoplay; fullscreen; xr-spatial-tracking"
+        allowfullscreen>
+      </iframe>
+    </div>`;
+  } else if(p.video){
+    media=`<video class="modal-img" src="${p.video}" controls autoplay playsinline style="width:100%;border-radius:12px;max-height:60vh"></video>`;
+  } else {
+    media=`<img loading="lazy" class="modal-img" src="${p.img}" alt="${p.title}" onerror="this.outerHTML='<div class=modal-img-placeholder>${p.emoji}</div>'">`;
+  }
+  document.getElementById('modal-content').innerHTML=`${media}<div class="modal-body"><div class="modal-label">${p.label}</div><div class="modal-title">${p.title}</div>${p.texts.map(t=>`<p class="modal-text">${t}</p>`).join('')}<div class="modal-tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></div>`;
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
 function closeModal(){document.getElementById('modal').classList.remove('open');document.body.style.overflow='';const v=document.querySelector('#modal-content video');if(v)v.pause();document.getElementById('modal-content').innerHTML='';}
 function closeModalOutside(e){if(e.target===document.getElementById('modal'))closeModal();}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
