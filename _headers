@@ -1,0 +1,47 @@
+/contact
+  Location: /contact.html
+  Status: 301
+
+/realisations
+  Location: /realisations.html
+  Status: 301
+
+/carte
+  Location: /carte.html
+  Status: 301
+
+/medias
+  Location: /medias.html
+  Status: 301
+
+/services
+  Location: /services.html
+  Status: 301
+
+/a-propos
+  Location: /a-propos.html
+  Status: 301
+
+/blog
+  Location: /blog.html
+  Status: 301
+
+/blog-drone-guadeloupe
+  Location: /blog-drone-guadeloupe.html
+  Status: 301
+
+/blog-inspection-toiture
+  Location: /blog-inspection-toiture.html
+  Status: 301
+
+/blog-agriculture-precision
+  Location: /blog-agriculture-precision.html
+  Status: 301
+
+/cgv
+  Location: /cgv.html
+  Status: 301
+
+/mentions-legales
+  Location: /mentions-legales.html
+  Status: 301
